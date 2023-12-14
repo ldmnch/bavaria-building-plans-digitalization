@@ -165,7 +165,7 @@ def scrape_bounding_boxes(boxes,
 
             data = scrape_geoservices_api(url)
                 
-            data.to_csv(f'data/{output_folder}/bounding_box_{box}.csv', index=False)
+            data.to_csv(f'{output_folder}/bounding_box_{box}.csv', index=False)
 
             time.sleep(10)
                 

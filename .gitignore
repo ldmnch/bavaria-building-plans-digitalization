@@ -1,5 +1,5 @@
 ### Data folder
 *.pyc
-scrape_geoservices.py
 *.csv
 *.json
+*.pdf

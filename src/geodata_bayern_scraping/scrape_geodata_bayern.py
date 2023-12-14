@@ -64,7 +64,7 @@ def write_results(json_data,
     
     '''
     
-    file_name = f'data/{output_folder}/{file_name}.json'
+    file_name = f'{output_folder}/{file_name}.json'
 
     # Write JSON string to a file
     with open(file_name, 'w') as file:
