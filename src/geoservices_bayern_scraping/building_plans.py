@@ -198,6 +198,8 @@ def scrape_in_batches(bounding_boxes,
 
         bounding_boxes_batch = bounding_boxes[i:i+batch_size]
 
+        print('Running batch '+str(i)+' of '+str(len(bounding_boxes))+' bounding boxes.')
+
         scrape_bounding_boxes(bounding_boxes_batch,
                           max_retries = max_retries, 
                           output_folder = output_folder)
