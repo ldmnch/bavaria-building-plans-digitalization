@@ -1,4 +1,5 @@
 ### Data folder
-data/*
 *.pyc
 scrape_geoservices.py
+*.csv
+*.json
