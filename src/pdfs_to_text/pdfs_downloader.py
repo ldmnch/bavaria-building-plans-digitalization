@@ -28,7 +28,7 @@ def is_downloadable(url):
 def filtering_useful_data(date_column: str,
                           data: pd.DataFrame):
     """
-    Takes as input NRW geodataframe, parses the dates, filters BP from 2012 and onwards and keeps only PDF files. 
+    Takes as input Geodataframe, parses the dates, filters BP from 2012 and onwards and keeps only PDF files. 
     """
 
     # Parse date column into date format
@@ -96,16 +96,18 @@ def run_pdf_downloader(input_df: pd.DataFrame,
                        id_column: str,
                        link_column: str,
                        date_column: str,
-                       output_folder : str#,
-                       #sample_n: int = None
+                       output_folder : str,
+                       sample_n: int = None
                        ):
     """
     This function takes as input a dataframe with the links to the PDFs and downloads them to the output folder.
 
 
     Args:
-        input_df (pd.DataFrame): DataFrame that contains the links to the PDFs, with the columns
-            "scanurl" and "objectid"
+        input_df (pd.DataFrame): DataFrame that contains the links to the PDFs.
+        id_column (str): Name of ID column
+        link_column (str): Column that contains the links
+        date_column (str): Column that contains the dates
         output_folder (str): Path to the folder where the PDFs will be saved
         sample_n (int): Number of rows to sample from the input_df. If None, all rows are used.
 
@@ -117,8 +119,8 @@ def run_pdf_downloader(input_df: pd.DataFrame,
 
     input_df = filtering_useful_data(data = input_df, date_column = date_column)
 
-    #if sample_n:
-    #    input_df = input_df.sample(n=sample_n, random_state=912)
+    if sample_n:
+        input_df = input_df.sample(n=sample_n, random_state=912)
 
     # Check if the output folder exists, if not creates it
     if not os.path.exists(output_folder):
