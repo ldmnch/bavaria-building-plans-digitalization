@@ -173,9 +173,12 @@ def scrape_bounding_boxes(boxes,
 
             time.sleep(10)
 
+            with open(f'{output_folder}/logs.txt', 'a') as log_file:
+                log_file.write(f"Box {str(box)}: An error occurred - {str(ae)}\n")
+
             continue
 
-        except HTTPError or requests.exceptions.ConnectTimeout:
+        except HTTPError or requests.exceptions.ConnectTimeout as he:
 
             retry_count += 1 
 
@@ -185,7 +188,11 @@ def scrape_bounding_boxes(boxes,
 
             else:
 
+                with open(f'{output_folder}/logs.txt', 'a') as log_file:
+                    log_file.write(f"Box {str(box)}: An error occurred - {str(he)}\n")
+
                 continue
+
 
 def scrape_in_batches(bounding_boxes, 
                       batch_size,
