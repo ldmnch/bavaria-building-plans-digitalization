@@ -6,7 +6,7 @@ bounding_boxes = bounding_boxes.generate_sub_bboxes(bounding_box= bavaria_boundi
 
 #Resume from error point: 
 
-bounding_boxes = bounding_boxes[102759:]
+bounding_boxes = bounding_boxes[253815:]
 
 building_plans.scrape_in_batches(bounding_boxes,
                       batch_size = 500,
