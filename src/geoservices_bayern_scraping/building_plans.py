@@ -178,7 +178,7 @@ def scrape_bounding_boxes(boxes,
 
             continue
 
-        except HTTPError or requests.exceptions.ConnectTimeout or requests.exceptions.ConnectionError as he:
+        except HTTPError or requests.exceptions.ConnectTimeout or requests.exceptions.ConnectionError or requests.exceptions.SSLError as he:
 
             retry_count += 1 
 
