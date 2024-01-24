@@ -11,7 +11,7 @@ def generate_ranges(bbox = (4195669.333333333, 4998144, 4724053.333333333, 57661
         Generator object with sub-boxes. 
     '''
     min_x, min_y, max_x, max_y = bbox
-    step = 1000
+    step = 10000
     
     for x in range(int(min_x), int(max_x), step):
         for y in range(int(min_y), int(max_y), step):
