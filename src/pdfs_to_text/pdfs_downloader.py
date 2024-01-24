@@ -117,7 +117,7 @@ def run_pdf_downloader(input_df: pd.DataFrame,
     error_links = []
     error_ids = []
 
-    input_df = filtering_useful_data(data = input_df, date_column = date_column)
+    #input_df = filtering_useful_data(data = input_df, date_column = date_column)
 
     if sample_n:
         input_df = input_df.sample(n=sample_n, random_state=912)
