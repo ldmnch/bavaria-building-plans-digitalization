@@ -1,8 +1,24 @@
 import os
 import pandas as pd
 import random
+import aspose.words as aw 
+import tika
+
 from loguru import logger
-from tika import parser
+from tika import parser, language
+from tempfile import NamedTemporaryFile
+
+def convert_pdf_to_tiff(pdf_path, tiff_path):
+    
+    tiff_filename = f"{tiff_path}.tiff"
+          
+    # Open the Document 
+    doc = aw.Document(pdf_path) 
+
+    # Save the Document in the TIFF Format 
+    doc.save(tiff_filename) 
+
+
 
 def pdf_parser_from_path(pdf_path: str) -> dict:
     """Parse pdf and extract content and metadata
@@ -13,10 +29,32 @@ def pdf_parser_from_path(pdf_path: str) -> dict:
     Returns:
         parsed: dictionary containing content and metadata
     """
-    # try parsing with extended timeout, extract and store relevant info
+    # try parsing with extended timeout, extract and store relevant inf
+
+    headers = { "X-Tika-OCRLanguage": "deu",
+               'X-Tika-PDFextractInlineImages': 'true'}
+
     try:
         parsed = parser.from_file(pdf_path,
-                                  requestOptions={'timeout': 200})
+                                  requestOptions={'timeout': 200,
+                                                  'headers': headers})
+        
+        # Check if parsed content is NoneType and handle accordingly.
+
+        if "content" in parsed and parsed['content'] is None:
+            print(f"Content extraction failed using Tika. Attempting conversion to TIFF.")
+
+            # Convert PDF to temporary TIFF file
+            with NamedTemporaryFile(suffix=".tiff", delete=False) as tiff_file:
+                convert_pdf_to_tiff(pdf_path, tiff_file.name)
+
+                # Try parsing the TIFF file
+                parsed = parser.from_file(tiff_file.name,
+                                          requestOptions={'timeout': 200,
+                                                  'headers': headers})
+
+            os.remove(tiff_file.name)  # Delete the temporary TIFF file
+
         return {
             "content": parsed["content"],
             "metadata": parsed["metadata"]
@@ -55,6 +93,8 @@ def pdf_parser_from_folder(folder_path: str,
 
     # define empty df to store parsed result
     parsed_data = []
+
+    tika.initVM()
 
     # iterate over all files in folder
     for pdf_file in pdf_files:
