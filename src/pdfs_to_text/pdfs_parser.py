@@ -32,7 +32,8 @@ def pdf_parser_from_path(pdf_path: str) -> dict:
     # try parsing with extended timeout, extract and store relevant inf
 
     headers = { "X-Tika-OCRLanguage": "deu",
-               'X-Tika-PDFextractInlineImages': 'true'}
+               'X-Tika-PDFextractInlineImages': 'true'
+               }
 
     try:
         parsed = parser.from_file(pdf_path,
