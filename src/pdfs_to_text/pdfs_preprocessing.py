@@ -1,5 +1,7 @@
-import PyPDF2
 import os
+
+from pdf2image import convert_from_path
+from tqdm import tqdm
 
 def readfiles(input_folder):
    
@@ -14,20 +16,13 @@ def split_pdf(input_folder,
     input_pdf_path = os.path.join(input_folder, f'{file_name}.pdf')
 
     try:
-    
-            with open(input_pdf_path, 'rb') as file:
-                pdf_reader = PyPDF2.PdfReader(file)
+            
+            pages = convert_from_path(input_pdf_path, 90)
 
-                for page_num in range(len(pdf_reader.pages)):
-                    pdf_writer = PyPDF2.PdfWriter()
-                    pdf_writer.add_page(pdf_reader.pages[page_num])
+            for count, page in enumerate(pages):
+                page.save(f'{output_folder}/{file_name}_{count}.jpg', 'JPEG')
 
-                    output_pdf_path = f"{output_folder}/{file_name}_{page_num + 1}.pdf"
-
-                    with open(output_pdf_path, 'wb') as output_file:
-                        pdf_writer.write(output_file)
-
-    except PyPDF2.errors.PdfReadError as e:
+    except Exception as e:
         
         with open(f'{output_folder}/logs.txt', 'a') as log_file:
                 log_file.write(f"PDF {str(file_name)}: An error occurred - {str(e)}\n")
@@ -40,7 +35,7 @@ def run_pdfs_split(input_folder,
 
      pdfs = [p.removesuffix('.pdf') for p in pdfs]
 
-     for file in pdfs:
+     for file in tqdm(pdfs, total=len(pdfs)):
         split_pdf(input_folder = input_folder, 
                 file_name = file,
                 output_folder = output_folder)

@@ -1,0 +1,12 @@
+PDF 83509: An error occurred - Unable to get page count.
+Syntax Error: Couldn't find trailer dictionary
+Syntax Error: Couldn't find trailer dictionary
+Syntax Error: Couldn't read xref table
+
+PDF 84091: An error occurred - Unable to get page count.
+Syntax Error (12187492): Illegal character '>'
+Syntax Error: Couldn't find trailer dictionary
+Syntax Error (12187492): Illegal character '>'
+Syntax Error: Couldn't find trailer dictionary
+Syntax Error: Couldn't read xref table
+

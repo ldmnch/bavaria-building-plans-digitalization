@@ -4,10 +4,6 @@ bavaria_bounding_box =  (4195669.333333333, 4998144, 4724053.333333333, 5766144)
 
 bounding_boxes = bounding_boxes.generate_sub_bboxes(bounding_box= bavaria_bounding_box)
 
-#Resume from error point: 
-
-bounding_boxes = bounding_boxes[253815:]
-
 building_plans.scrape_in_batches(bounding_boxes,
                       batch_size = 500,
                       batch_delay = 30, 

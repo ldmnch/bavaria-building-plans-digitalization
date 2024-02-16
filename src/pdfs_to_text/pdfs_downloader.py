@@ -6,11 +6,10 @@ import requests
 from tqdm import tqdm
 
 def parse_date(date_string):
-    if isinstance(date_string, str):
-        try:
-            return pd.to_datetime(date_string)
-        except ValueError:
-            return np.nan
+    try:
+        return pd.to_datetime(date_string)
+    except ValueError:
+        return np.nan
 
 
 def is_downloadable(url):
@@ -26,6 +25,8 @@ def is_downloadable(url):
 
 
 def filtering_useful_data(date_column: str,
+                          start_date: str,
+                          end_date: str,
                           data: pd.DataFrame):
     """
     Takes as input Geodataframe, parses the dates, filters BP from 2012 and onwards and keeps only PDF files. 
@@ -35,8 +36,8 @@ def filtering_useful_data(date_column: str,
     data[date_column] = data[date_column].apply(parse_date)
 
     # Define the start date for filtering
-    start_date = pd.to_datetime('2011-12-31')
-    end_date = pd.to_datetime('2023-01-01')
+    start_date = pd.to_datetime(start_date)
+    end_date = pd.to_datetime(end_date)
 
     # Filter rows which the date is 2012 and onwards
     filtered_data = data[(data[date_column] >= start_date) & (data[date_column] < end_date)]
@@ -46,7 +47,8 @@ def filtering_useful_data(date_column: str,
 
 def download_pdfs(link: str,
                   object_id: str,
-                  output_folder: str):
+                  output_folder: str,
+                  timeout_seconds: int = 120):
     """ This function takes as input a link and downloads the PDFs to the output folder.
 
     It also returns the links and ids that failed to download.
@@ -66,7 +68,7 @@ def download_pdfs(link: str,
         # Check if the link contains downloadable content
         if is_downloadable(link):
             # Connect to link
-            response = requests.get(link)
+            response = requests.get(link, timeout=timeout_seconds)
 
             if response.status_code == 200:
                 # Define the pdf path
@@ -96,6 +98,8 @@ def run_pdf_downloader(input_df: pd.DataFrame,
                        id_column: str,
                        link_column: str,
                        date_column: str,
+                       start_date: str,
+                       end_date: str,
                        output_folder : str,
                        sample_n: int = None
                        ):
@@ -117,7 +121,7 @@ def run_pdf_downloader(input_df: pd.DataFrame,
     error_links = []
     error_ids = []
 
-    #input_df = filtering_useful_data(data = input_df, date_column = date_column)
+    input_df = filtering_useful_data(data = input_df, date_column = date_column, start_date=start_date, end_date=end_date)
 
     if sample_n:
         input_df = input_df.sample(n=sample_n, random_state=912)
