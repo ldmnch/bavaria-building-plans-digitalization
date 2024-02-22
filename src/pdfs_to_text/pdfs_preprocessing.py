@@ -27,6 +27,15 @@ def split_pdf(input_folder,
         with open(f'{output_folder}/logs.txt', 'a') as log_file:
                 log_file.write(f"PDF {str(file_name)}: An error occurred - {str(e)}\n")
 
+    except Warning as w:
+         
+        with open(f'{output_folder}/logs.txt', 'a') as log_file:
+                log_file.write(f"PDF {str(file_name)}: An error occurred - {str(w)}\n")
+
+
+
+
+
 
 def run_pdfs_split(input_folder,
                    output_folder):
