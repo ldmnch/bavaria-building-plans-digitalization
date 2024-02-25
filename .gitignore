@@ -1,6 +1,5 @@
 ### Data folder
 *.pyc
 *.csv
-*.json
 *.pdf
 *.jpg

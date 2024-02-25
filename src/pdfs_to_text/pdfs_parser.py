@@ -6,8 +6,6 @@ import easyocr
 
 from loguru import logger
 #from tika import parser, language
-from tempfile import NamedTemporaryFile
-
 
 def pdf_parser_from_path(pdf_path: str,
                          reader: easyocr.Reader) -> dict:

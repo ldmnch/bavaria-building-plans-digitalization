@@ -3,8 +3,7 @@ import easyocr
 
 from src.pdfs_to_text import pdfs_parser
 
-data = pd.read_csv('data/proc/building_plans/building_plans_metadata.csv')
-reader = easyocr.Reader(['de'])
+reader = easyocr.Reader(['de'], gpu=False)
 
 RAW_PDFS_FOLDER_PATH = "data/raw/building_plans/pdfs"
 SPLIT_PDFS_FOLDER_PATH = 'data/proc/building_plans/split_pdf/'
