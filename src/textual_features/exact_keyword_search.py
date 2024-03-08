@@ -32,9 +32,12 @@ def search_text_for_keywords(text: str,
         for keyword in keywords:
             # if one keyword consists of multiple words, split them
             if " " in keyword:
+
                 combined_words = keyword.split()
+                pattern = re.compile(r'\b{}\b'.format(r'\s+'.join(map(re.escape, combined_words))))
+
                 # search for keywords
-                if all(combined_word.lower() in words for combined_word in combined_words):
+                if re.search(pattern, text):
                     found_keywords.append(keyword)
             else:
                 # search for keywords
