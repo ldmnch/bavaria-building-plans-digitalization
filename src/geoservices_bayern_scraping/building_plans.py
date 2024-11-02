@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 import time
 from tqdm import tqdm 
 import random
+import os
 
 def parse_url(url):
 
@@ -134,64 +135,51 @@ def scrape_geoservices_api(url):
 
     return(data)
 
-def scrape_bounding_boxes(boxes,
-                          max_retries = 5, 
-                          output_folder = 'geoservices_results'):
+def scrape_bounding_boxes(boxes, max_retries=5, output_folder='geoservices_results'):
     '''
     Scrapes tables of building plans in geoservices Bayern for different bounding boxes. Writes outputs as csv. 
 
     Args: 
-
         boxes : List of strings with bounding boxes. 
         max_retries : Maximum number of retries for each page.
         retry_delay: Delay time between retries in seconds. 
         output_folder: Name of folder to output results to. 
 
     Returns: 
-
         saved data files to output_folder. 
-
-
     ''' 
 
-    max_retries = max_retries
-    retry_count = 0
+    # Ensure the output directory exists
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
 
     for box in tqdm(boxes):
+
+        retry_count = 0
         
-        try:
+        while retry_count < max_retries:
             
-            url = 'https://geoservices.bayern.de/mapserver4bauleitbvv/bauleitplan_intern?VERSION=1.1.1&REQUEST=GetFeatureInfo&SRS=EPSG:31468&LAYERS=bplan_rechtskraft_lvg&STYLES=&BBOX='+box+'&WIDTH=4&HEIGHT=4&QUERY_LAYERS=bplan_rechtskraft_lvg&X=2&Y=2&FORMAT=image/png&INFO_FORMAT=text/html&FEATURE_COUNT=5000&EXCEPTIONS=application/vnd.ogc.se_xml'
-
-            data = scrape_geoservices_api(url)
-                
-            data.to_csv(f'{output_folder}/bounding_box_{box}.csv', index=False)
-
-            time.sleep(10)
-                
-        except AttributeError as ae:
-
-            time.sleep(10)
-
-            with open(f'{output_folder}/logs.txt', 'a') as log_file:
-                log_file.write(f"Box {str(box)}: An error occurred - {str(ae)}\n")
-
-            continue
-
-        except HTTPError or requests.exceptions.ConnectTimeout or requests.exceptions.ConnectionError or requests.exceptions.SSLError as he:
-
-            retry_count += 1 
-
-            if retry_count < max_retries:
-
-                time.sleep(30)
-
-            else:
-
+            try:
+                url = f'https://geoservices.bayern.de/mapserver4bauleitbvv/bauleitplan_intern?VERSION=1.1.1&REQUEST=GetFeatureInfo&SRS=EPSG:31468&LAYERS=bplan_rechtskraft_lvg&STYLES=&BBOX={box}&WIDTH=4&HEIGHT=4&QUERY_LAYERS=bplan_rechtskraft_lvg&X=2&Y=2&FORMAT=image/png&INFO_FORMAT=text/html&FEATURE_COUNT=5000&EXCEPTIONS=application/vnd.ogc.se_xml'
+                data = scrape_geoservices_api(url)
+                data.to_csv(f'{output_folder}/bounding_box_{box}.csv', index=False)
+                time.sleep(10)
+                break  # Exit the retry loop on success
+            
+            except AttributeError as ae:
+                time.sleep(10)
                 with open(f'{output_folder}/logs.txt', 'a') as log_file:
-                    log_file.write(f"Box {str(box)}: An error occurred - {str(he)}\n")
-
-                continue
+                    log_file.write(f"Box {str(box)}: An error occurred - {str(ae)}\n")
+                break  # Exit the retry loop on AttributeError
+            
+            except (requests.exceptions.HTTPError, requests.exceptions.ConnectTimeout, requests.exceptions.ConnectionError, requests.exceptions.SSLError) as he:
+                retry_count += 1
+                if retry_count < max_retries:
+                    time.sleep(30)
+                else:
+                    with open(f'{output_folder}/logs.txt', 'a') as log_file:
+                        log_file.write(f"Box {str(box)}: An error occurred - {str(he)}\n")
+                    break  # Exit the retry loop after max retries
 
 
 def scrape_in_batches(bounding_boxes, 
