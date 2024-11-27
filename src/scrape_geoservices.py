@@ -1,11 +1,10 @@
-from src.geoservices_bayern_scraping import building_plans, bounding_boxes
+import pandas as pd
+from geoservices_bayern_scraping import building_plans, bounding_boxes
 
-bavaria_bounding_box =  (4195669.333333333, 4998144, 4724053.333333333, 5766144)
+gemeinden = pd.read_json('./data/proc/geobayern_bpsites/geobayern_bauleitsites.json', orient= "index")
 
-bounding_boxes = bounding_boxes.generate_sub_bboxes(bounding_box= bavaria_bounding_box)
-
-building_plans.scrape_in_batches(bounding_boxes,
-                      batch_size = 500,
+building_plans.scrape_in_batches(gemeinden,
+                      batch_size = 100,
                       batch_delay = 30, 
-                      max_retries = 5,
-                      output_folder = 'geoservices_results')
+                      max_retries = 3,
+                      output_folder = './data/raw/geoservices_results')

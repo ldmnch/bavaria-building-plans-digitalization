@@ -1,7 +1,10 @@
 ### Data folder
 *.pyc
-*.csv
 *.pdf
 *.jpg
 *.zip
 /data/raw/building_plans/bavaria_shapes
+/data/raw/geoservices_results
+/data/raw/building_plans/pdfs
+/data/proc/building_plans/features/keywords/exact_search
+/data/final/bplan/features/keywords/exact_search

@@ -1,0 +1,724 @@
+,Maximal construction height (GFZ),Maximal floor coverage (GRZ),Types of building use (Art der baulichen Nutzung),Appearance of green areas (Grünflächen),Firsthöhe length (FH),Traufhöhe length (TH),Company names mentioned,raw_llm_response,id,filename
+0,Not specified,Not specified,Not specified,False,Not specified,Not specified,['ARCHITEKTURBÜRO STEFAN RICHTER'],"assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [
+    ""ARCHITEKTURBÜRO STEFAN RICHTER""
+  ]
+}
+```",16363,16363_0.jpg
+0,Not specified,Not specified,['Mischgebiet'],True,Not specified,Not specified,"['Geno-Bank', 'Hertie']","assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": [""Mischgebiet""],
+  ""Appearance of green areas (Grünflächen)"": true,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [""Geno-Bank"", ""Hertie""]
+}
+```",52668,52668_26.jpg
+0,Not specified,Not specified,Not specified,Not specified,Not specified,Not specified,Not specified,"assistant: Based on the provided excerpt, which is only a reference to 'Anlage 4.2' and does not contain any actual details from a building plan, it is not possible to extract the requested information. Therefore, the JSON output would indicate that all specified details are not specified:
+
+```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": ""Not specified"",
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": ""Not specified""
+}
+```
+
+To provide the requested information, a more detailed excerpt from the building plan would be necessary.",52669,52669_274.jpg
+0,Not specified,Not specified,Not specified,True,Not specified,Not specified,['FGN (Ferngas Nordbayern)'],"assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": true,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [""FGN (Ferngas Nordbayern)""]
+}
+```",68546,68546_12.jpg
+0,Not specified,Not specified,Not specified,False,Not specified,Not specified,['ARCHITEKTURBÜRO Ludwig A. BadeFs'],"assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [
+    ""ARCHITEKTURBÜRO Ludwig A. BadeFs""
+  ]
+}
+```",87784,87784_1.jpg
+0,Not specified,Not specified,Not specified,False,Not specified,Not specified,Not specified,"assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": ""Not specified""
+}
+```",50954,50954_98.jpg
+0,Not specified,Not specified,"['Allgemeines Wohngebiet WA2', 'Mischgebiet MI']",True,Not specified,Not specified,"['Stadt Grafenau', 'Fleche', 'Ihron', 'Werensprechend']","assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": [
+    ""Allgemeines Wohngebiet WA2"",
+    ""Mischgebiet MI""
+  ],
+  ""Appearance of green areas (Grünflächen)"": true,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [
+    ""Stadt Grafenau"",
+    ""Fleche"",
+    ""Ihron"",
+    ""Werensprechend""
+  ]
+}
+```",80261,80261_8.jpg
+0,Not specified,Not specified,Not specified,False,Not specified,Not specified,"['Stadtwerke', 'Stadt Plattling']","assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [""Stadtwerke"", ""Stadt Plattling""]
+}
+```",49310,49310_40.jpg
+0,Not specified,Not specified,['Gewerbegebiet'],False,Not specified,Not specified,Not specified,"assistant: Based on the provided excerpt from a building plan, the information requested is not fully available. Here is the JSON with the extracted information and placeholders for the missing data:
+
+```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": [""Gewerbegebiet""],
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": ""Not specified""
+}
+```
+
+The excerpt does not provide explicit numeric values for the maximal construction height (GFZ), maximal floor coverage (GRZ), Firsthöhe length (FH), or Traufhöhe length (TH). It does mention ""Gewerbegebiet,"" which indicates a type of building use (commercial area). There is no mention of green areas or company names.",79520,79520_0.jpg
+0,Not specified,Not specified,Not specified,True,Not specified,Not specified,['Stadt Deggendorf'],"assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": true,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [
+    ""Stadt Deggendorf""
+  ]
+}
+```",52670,52670_39.jpg
+0,Not specified,Not specified,Not specified,True,Not specified,Not specified,"['Stadt Aschaffanburg', 'Baumarkt Goldbacher Straße', 'Okokonto Neurod']","assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": true,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [
+    ""Stadt Aschaffanburg"",
+    ""Baumarkt Goldbacher Straße"",
+    ""Okokonto Neurod""
+  ]
+}
+```",6317,6317_24.jpg
+0,Not specified,Not specified,Not specified,Not specified,Not specified,Not specified,['MARKT FÜRSTENZELL'],"assistant: Based on the provided excerpt, the information requested cannot be fully extracted as the excerpt does not contain explicit details on construction height, floor coverage, types of building use, presence of green areas, Firsthöhe length, or Traufhöhe length. However, we can identify the company name mentioned. Here is the JSON with the information that can be extracted:
+
+```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": ""Not specified"",
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [""MARKT FÜRSTENZELL""]
+}
+```
+
+The company name ""MARKT FÜRSTENZELL"" is identified as it appears to be the name of the municipality or local authority rather than a private company, but it is the only entity name provided in the excerpt. The other information requested is not specified in the provided text.",78505,78505_5.jpg
+0,Not specified,Not specified,['Wohngebietsausweisung'],True,Not specified,Not specified,[],"assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": [
+    ""Wohngebietsausweisung""
+  ],
+  ""Appearance of green areas (Grünflächen)"": true,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": []
+}
+```",49310,49310_93.jpg
+0,Not specified,Not specified,Not specified,False,Not specified,Not specified,['Architekturbüro Feßl'],"assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [""Architekturbüro Feßl""]
+}
+```",88101,88101_0.jpg
+0,Not specified,Not specified,['Wohnbauland'],True,Not specified,Not specified,['Schichl GmbH'],"assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": [""Wohnbauland""],
+  ""Appearance of green areas (Grünflächen)"": true,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [""Schichl GmbH""]
+}
+```",92171,92171_2.jpg
+0,Not specified,Not specified,Not specified,False,Not specified,Not specified,Not specified,"assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": ""Not specified""
+}
+```",86293,86293_15.jpg
+0,Not specified,Not specified,"['Wohngebäude', 'Gewerbebetriebe', 'Stadtgärtnerei', 'Gasthaus']",False,Not specified,Not specified,"['Büro Möhler Partner', 'Gärtnerei in der Otto-Denk-Straße', 'Gasthaus Alt-Schachinger', 'Donal Goacrjopan E', 'Cu OsiekhofeN GeoPlan']","assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": [
+    ""Wohngebäude"",
+    ""Gewerbebetriebe"",
+    ""Stadtgärtnerei"",
+    ""Gasthaus""
+  ],
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [
+    ""Büro Möhler Partner"",
+    ""Gärtnerei in der Otto-Denk-Straße"",
+    ""Gasthaus Alt-Schachinger"",
+    ""Donal Goacrjopan E"",
+    ""Cu OsiekhofeN GeoPlan""
+  ]
+}
+```",52669,52669_186.jpg
+0,Not specified,Not specified,['Mischgebiet'],True,Not specified,Not specified,"['Landschull', 'Plun', 'Pussu, Lundschullsarchitckt Dipl-Iug', 'honas Hesnaie', 'Burgbcrg']","assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": [
+    ""Mischgebiet""
+  ],
+  ""Appearance of green areas (Grünflächen)"": true,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [
+    ""Landschull"",
+    ""Plun"",
+    ""Pussu, Lundschullsarchitckt Dipl-Iug"",
+    ""honas Hesnaie"",
+    ""Burgbcrg""
+  ]
+}
+```",80115,80115_11.jpg
+0,Not specified,Not specified,"['allgemeines Wohngebiet', 'Mischgebiet', 'Sondergebiet']",False,Not specified,Not specified,"['hoock farny ingenieure', 'sochverstang ge fCimmissionsschutz ung okustik']","assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": [""allgemeines Wohngebiet"", ""Mischgebiet"", ""Sondergebiet""],
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [""hoock farny ingenieure"", ""sochverstang ge fCimmissionsschutz ung okustik""]
+}
+```",84166,84166_59.jpg
+0,Not specified,Not specified,Not specified,False,Not specified,Not specified,['GeoPlan'],"assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [""GeoPlan""]
+}
+```",86089,86089_1.jpg
+0,Not specified,Not specified,Not specified,Not specified,Not specified,Not specified,Not specified,"assistant: Based on the provided excerpt from a building plan, the requested information cannot be fully extracted as the excerpt does not contain specific details regarding construction height, floor coverage, types of building use, appearance of green areas, Firsthöhe length, or Traufhöhe length. Additionally, no company names are explicitly mentioned. Therefore, the JSON output for the requested information would be as follows:
+
+```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": ""Not specified"",
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": ""Not specified""
+}
+```
+
+The excerpt provided seems to be a list of terms and references that might be related to a zoning or land use plan, but it does not contain the detailed information required to answer the questions.",86425,86425_10.jpg
+0,Not specified,Not specified,Not specified,False,Not specified,Not specified,Not specified,"assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": ""Not specified""
+}
+```",65780,65780_1.jpg
+0,Not specified,Not specified,Not specified,True,Not specified,Not specified,['E.ON NETZ GMBH'],"assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": true,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [""E.ON NETZ GMBH""]
+}
+```",3853,3853_11.jpg
+0,Not specified,Not specified,Not specified,False,Not specified,Not specified,Not specified,"assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": ""Not specified""
+}
+```",30930,30930_1.jpg
+0,Not specified,Not specified,"['Gewerbegebiet', 'Sondergebiet', 'Mischgebiet']",False,Not specified,Not specified,"['hoock farny ingenieure', 'Norma', 'Edeka', 'Rossmann', 'Meier Möbel']","assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": [
+    ""Gewerbegebiet"",
+    ""Sondergebiet"",
+    ""Mischgebiet""
+  ],
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [
+    ""hoock farny ingenieure"",
+    ""Norma"",
+    ""Edeka"",
+    ""Rossmann"",
+    ""Meier Möbel""
+  ]
+}
+```",90109,90109_2.jpg
+0,Not specified,Not specified,Not specified,False,Not specified,Not specified,['Schachinger Garlen'],"assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [
+    ""Schachinger Garlen""
+  ]
+}
+```",52669,52669_125.jpg
+0,Not specified,Not specified,Not specified,False,Not specified,Not specified,['Hofmann'],"assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [""Hofmann""]
+}
+```",48801,48801_55.jpg
+0,Not specified,Not specified,Not specified,Not specified,Not specified,Not specified,['Hoock & Partner Sachverständige PartG mbB'],"assistant: Based on the provided excerpt, it appears that the specific details requested for the building plan are not included in the text snippet given. Therefore, the JSON output for the requested information would be as follows:
+
+```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": ""Not specified"",
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [""Hoock & Partner Sachverständige PartG mbB""]
+}
+```
+
+The only information that can be extracted from the excerpt is the name of the company involved, which is ""Hoock & Partner Sachverständige PartG mbB"". All other requested details are not specified in the provided text.",86279,86279_54.jpg
+0,Not specified,Not specified,Not specified,False,Not specified,Not specified,"['Stadt Bad Kissingen', 'Landesamt für Denkmalpflege', 'Bayer. Staatsministerium des Inneren']","assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [
+    ""Stadt Bad Kissingen"",
+    ""Landesamt für Denkmalpflege"",
+    ""Bayer. Staatsministerium des Inneren""
+  ]
+}
+```",28526,28526_4.jpg
+0,Not specified,Not specified,"['Gewerbliche Nutzung', 'Wohnbaulagen', 'Neunutzung von Kasernengebäuden']",False,Not specified,Not specified,"['Smith-Kaserne', 'Travis-Park']","assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": [
+    ""Gewerbliche Nutzung"",
+    ""Wohnbaulagen"",
+    ""Neunutzung von Kasernengebäuden""
+  ],
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [
+    ""Smith-Kaserne"",
+    ""Travis-Park""
+  ]
+}
+```",6097,6097_5.jpg
+0,Not specified,Not specified,"['Flächen für Versorgungsanlagen, für die Abfallentsorgung und Abwasserbeseitigung', 'Geplantes Biomasseheizwerk', 'Flächen für Garagen']",False,Not specified,Not specified,"['Architekten', 'GEMEINDE STADT VIECHTACH', 'Enieur', 'LANDKREIS REGEN']","assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": [
+    ""Flächen für Versorgungsanlagen, für die Abfallentsorgung und Abwasserbeseitigung"",
+    ""Geplantes Biomasseheizwerk"",
+    ""Flächen für Garagen""
+  ],
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [
+    ""Architekten"",
+    ""GEMEINDE STADT VIECHTACH"",
+    ""Enieur"",
+    ""LANDKREIS REGEN""
+  ]
+}
+```
+
+Please note that the information provided in the excerpt is limited, and some requested details are not specified. The types of building use listed are inferred from the context of the excerpt, and the company names mentioned are those that appear to be associated with the planning or administrative aspects of the project. The appearance of green areas is assumed to be false as there is no mention of them in the excerpt.",49014,49014_2.jpg
+0,Not specified,Not specified,Not specified,True,Not specified,Not specified,"['ABSP Passau', 'Land Schafff', 'Hi7ve']","assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": true,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [
+    ""ABSP Passau"",
+    ""Land Schafff"",
+    ""Hi7ve""
+  ]
+}
+```",78549,78549_16.jpg
+0,Not specified,Not specified,Not specified,False,Not specified,Not specified,"['GE Außembrünst West', 'Markl', 'Rohrrbach', 'Selte 86', 'Berichl-N.', 'ACe-0721-8696/02/rev1', 'ZCCOQ', 'ONNENIANconSuTanis', 'Tabeze']","assistant: Based on the provided excerpt, it is difficult to extract the requested information accurately due to the fragmented and unclear nature of the text. The excerpt appears to be a mix of words, numbers, symbols, and codes that do not directly correspond to the requested details. However, I will attempt to extract any relevant information that can be inferred from the given text:
+
+```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [
+    ""GE Außembrünst West"",
+    ""Markl"",
+    ""Rohrrbach"",
+    ""Selte 86"",
+    ""Berichl-N."",
+    ""ACe-0721-8696/02/rev1"",
+    ""ZCCOQ"",
+    ""ONNENIANconSuTanis"",
+    ""Tabeze""
+  ]
+}
+```
+
+Please note that the information provided in the JSON is based on the assumption that the company names are the words that appear to be proper nouns or alphanumeric codes. The rest of the information is marked as ""Not specified"" because the excerpt does not contain clear indicators for those specific details. Additionally, the appearance of green areas is set to false as there is no mention of green areas in the provided text. If the actual building plan contains more structured and detailed information, it would be necessary to review that document to accurately extract the requested information.",86108,86108_84.jpg
+0,Not specified,0.26,"['SONDERGEBET', 'SOLARPARK']",False,5.10 m,2.80 m,['LUDWIG BAUER'],"assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""0.26"",
+  ""Types of building use (Art der baulichen Nutzung)"": [
+    ""SONDERGEBET"",
+    ""SOLARPARK""
+  ],
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""5.10 m"",
+  ""Traufhöhe length (TH)"": ""2.80 m"",
+  ""Company names mentioned"": [
+    ""LUDWIG BAUER""
+  ]
+}
+```",90975,90975_0.jpg
+0,Not specified,Not specified,Not specified,False,Not specified,Not specified,"['hoock farny ingenieure', 'aske']","assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [
+    ""hoock farny ingenieure"",
+    ""aske""
+  ]
+}
+```",52769,52769_131.jpg
+0,Not specified,Not specified,"['Flächen für den Verkehr', 'Öffentliche Verkehrsflächen', 'Offentliche Parkplätze', 'Versorgungsanlagen']",True,Not specified,Not specified,['Überlandwerk Rhön Mellrichstadt'],"assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": [
+    ""Flächen für den Verkehr"",
+    ""Öffentliche Verkehrsflächen"",
+    ""Offentliche Parkplätze"",
+    ""Versorgungsanlagen""
+  ],
+  ""Appearance of green areas (Grünflächen)"": true,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [
+    ""Überlandwerk Rhön Mellrichstadt""
+  ]
+}
+```",31682,31682_2.jpg
+0,Not specified,Not specified,Not specified,False,Not specified,Not specified,"['Dipl -Ing. Barbara Franz', 'LIGA Bank Passau']","assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [
+    ""Dipl -Ing. Barbara Franz"",
+    ""LIGA Bank Passau""
+  ]
+}
+```",75326,75326_7.jpg
+0,Not specified,Not specified,Not specified,False,Not specified,Not specified,"['WURTH', 'DIPL', 'Ikg']","assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [
+    ""WURTH"",
+    ""DIPL"",
+    ""Ikg""
+  ]
+}
+```",83862,83862_4.jpg
+0,Not specified,Not specified,Not specified,Not specified,Not specified,Not specified,Not specified,"assistant: Based on the provided excerpt, which appears to be a sequence of characters and numbers rather than a descriptive building plan, it is not possible to extract the requested information accurately. The excerpt does not contain any clear references to construction height, floor coverage, types of building use, green areas, Firsthöhe length, Traufhöhe length, or company names.
+
+Given the lack of context and detail, the JSON output for the requested information would be as follows, assuming that all requested details are 'Not specified' due to the insufficient data provided:
+
+```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": ""Not specified"",
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": ""Not specified""
+}
+```
+
+If the excerpt is part of a larger document or if there is additional context that could be provided, it may be possible to extract the requested information. However, with the current excerpt alone, the information cannot be determined.",51713,51713_58.jpg
+0,Not specified,Not specified,"['Allgemeines Wohngebiet', 'Mischgebiet', 'Gewerbegebiet']",False,Not specified,Not specified,['Hoock & Partner Sachverständige PartG mbB'],"assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": [
+    ""Allgemeines Wohngebiet"",
+    ""Mischgebiet"",
+    ""Gewerbegebiet""
+  ],
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [
+    ""Hoock & Partner Sachverständige PartG mbB""
+  ]
+}
+```",86279,86279_35.jpg
+0,Not specified,Not specified,Not specified,False,Not specified,Not specified,"['FESSL', 'TELLO + PARTNER', 'WeaDex']","assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [
+    ""FESSL"",
+    ""TELLO + PARTNER"",
+    ""WeaDex""
+  ]
+}
+```",69159,69159_0.jpg
+0,Not specified,Not specified,Not specified,True,Not specified,Not specified,['Hans Käckeis'],"assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": true,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [""Hans Käckeis""]
+}
+```",48214,48214_0.jpg
+0,Not specified,Not specified,Not specified,False,Not specified,"{'numeric_value': 6.54, 'unit_of_measurement': 'm'}",['Praanen Braun-engebier'],"assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": {
+    ""numeric_value"": 6.54,
+    ""unit_of_measurement"": ""m""
+  },
+  ""Company names mentioned"": [
+    ""Praanen Braun-engebier""
+  ]
+}
+```
+
+Please note that the excerpt provided is somewhat unclear and appears to contain typographical errors or distortions, which makes it difficult to extract accurate information. The values and information included in the JSON response are based on the best interpretation of the given text. If the original document is clearer or contains additional context, the extracted information might differ.",87198,87198_3.jpg
+0,Not specified,Not specified,Not specified,True,Not specified,Not specified,"['Stadtbau GmbH', 'GEO.VER S.UM']","assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": true,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [""Stadtbau GmbH"", ""GEO.VER S.UM""]
+}
+```",51754,51754_13.jpg
+0,Not specified,Not specified,Not specified,False,Not specified,Not specified,[],"assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": []
+}
+```",52669,52669_246.jpg
+0,Not specified,Not specified,Not specified,True,Not specified,Not specified,Not specified,"assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": true,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": ""Not specified""
+}
+```",38055,38055_24.jpg
+0,Not specified,Not specified,Not specified,False,Not specified,Not specified,"['Ingenieurbüro Koch', 'metsoft GbR']","assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [""Ingenieurbüro Koch"", ""metsoft GbR""]
+}
+```",48801,48801_160.jpg
+0,"{'numeric_value': 1.0, 'unit_of_measurement': 'dimensionless'}","{'numeric_value': 0.6, 'unit_of_measurement': 'dimensionless'}",['Gewerbegebiet GE'],True,Not specified,Not specified,"['Markt Furstenzell', 'Landkreises']","assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": {
+    ""numeric_value"": 1.0,
+    ""unit_of_measurement"": ""dimensionless""
+  },
+  ""Maximal floor coverage (GRZ)"": {
+    ""numeric_value"": 0.60,
+    ""unit_of_measurement"": ""dimensionless""
+  },
+  ""Types of building use (Art der baulichen Nutzung)"": [
+    ""Gewerbegebiet GE""
+  ],
+  ""Appearance of green areas (Grünflächen)"": true,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [
+    ""Markt Furstenzell"",
+    ""Landkreises""
+  ]
+}
+```",74643,74643_17.jpg
+0,Not specified,Not specified,Not specified,Not specified,Not specified,Not specified,Not specified,"assistant: Based on the provided excerpt, there is not enough information to extract the requested details accurately. The excerpt does not contain specific data on construction height, floor coverage, types of building use, presence of green areas, Firsthöhe length, Traufhöhe length, or company names. Therefore, the JSON output for the requested information would be as follows, indicating that the information is not specified:
+
+```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": ""Not specified"",
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": ""Not specified""
+}
+```
+
+Please provide a more detailed excerpt from the building plan to extract the requested information.",54103,54103_17.jpg
+0,Not specified,Not specified,Not specified,False,Not specified,Not specified,['Grellmann und Partner'],"assistant: ```json
+{
+  ""Maximal construction height (GFZ)"": ""Not specified"",
+  ""Maximal floor coverage (GRZ)"": ""Not specified"",
+  ""Types of building use (Art der baulichen Nutzung)"": ""Not specified"",
+  ""Appearance of green areas (Grünflächen)"": false,
+  ""Firsthöhe length (FH)"": ""Not specified"",
+  ""Traufhöhe length (TH)"": ""Not specified"",
+  ""Company names mentioned"": [
+    ""Grellmann und Partner""
+  ]
+}
+```",5119,5119_2.jpg

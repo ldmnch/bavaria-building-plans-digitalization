@@ -7,7 +7,8 @@ from tqdm import tqdm
 import random
 import os
 
-def parse_url(url):
+def parse_url(url : str = "https://geoportal.bayern.de/ba-backend/getFeature", 
+              easting_northing : list = [4503718.338133049, 5407116.539337536]):
 
     '''
     Reads a url and parses its content as BeautifulSoup object.
@@ -21,16 +22,24 @@ def parse_url(url):
         BeautifulSoup object parsed.
 
     '''
-    
-    response = requests.get(url)
-    
-    response.raise_for_status()
 
+    payload = {
+    "id": "26d2b2b8-3944-4a49-aec2-59f827d9aa9e",
+    "resolution": 4,
+    "easting": easting_northing[0],
+    "northing": easting_northing[1],
+    "password": "",
+    "srid": "31468",
+    "username": ""
+    }
+
+    response = requests.post(url, json=payload)
+    
     soup = BeautifulSoup(response.text, 'html.parser')
 
     return(soup)
 
-def scrape_all_table_rows(soup):
+def scrape_all_tables(soup):
     '''
     Reads BeautifulSoup object with parsed html and reads all lines of a table. 
 
@@ -43,17 +52,31 @@ def scrape_all_table_rows(soup):
 
     '''
 
-    table = soup.find('table')
+    tables = soup.find_all('table')
 
-    rows = []
+    plans = []
 
-    for tr in table.find_all('tr'):
-
-        row = [td.text for td in tr.find_all('td')]
+    for table in tables:
+    # Initialize a dictionary for each plan
+        plan = {}
         
-        rows.append(row)
+        # Extract the table rows
+        rows = table.find_all('tr')
+        for row in rows:
+            columns = row.find_all('td')
+            if len(columns) == 2:
+                key = columns[0].get_text(strip=True)
+                value = columns[1].get_text(strip=True)
+                # Extract hyperlink if present
+                link = columns[1].find('a')
+                if link and link['href']:
+                    value = link['href']
+                plan[key] = value
+        
+        # Add the plan to the list
+        plans.append(plan)
 
-    return(rows)
+    return(plans)
 
 def split_list_by_value(lst, 
                         value = 'Auskunft Bauleitplanung (Bebauungsplan)'):
@@ -123,19 +146,20 @@ def convert_list_of_results_to_dataframe(list_of_rows):
 
     return(result_data)
 
-def scrape_geoservices_api(url):
+def scrape_geoservices_api(url : str, 
+                           easting_northing : list = [4503718.338133049, 5407116.539337536]):
 
     parsed_site = parse_url(url)
 
-    rows_list = scrape_all_table_rows(parsed_site)
+    rows_list = scrape_all_tables(parsed_site)
 
-    scraped_rows = split_list_by_value(rows_list, 'Auskunft Bauleitplanung (Bebauungsplan)')
-
-    data = convert_list_of_results_to_dataframe(scraped_rows)
+    data = pd.DataFrame(rows_list)
 
     return(data)
 
-def scrape_bounding_boxes(boxes, max_retries=5, output_folder='geoservices_results'):
+def scrape_bounding_boxes(data_gemeinden, 
+                          max_retries : int = 5, 
+                          output_folder : str ='geoservices_results'):
     '''
     Scrapes tables of building plans in geoservices Bayern for different bounding boxes. Writes outputs as csv. 
 
@@ -153,23 +177,24 @@ def scrape_bounding_boxes(boxes, max_retries=5, output_folder='geoservices_resul
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
-    for box in tqdm(boxes):
+    for index, row in tqdm(data_gemeinden.iterrows()):
 
         retry_count = 0
         
         while retry_count < max_retries:
             
             try:
-                url = f'https://geoservices.bayern.de/mapserver4bauleitbvv/bauleitplan_intern?VERSION=1.1.1&REQUEST=GetFeatureInfo&SRS=EPSG:31468&LAYERS=bplan_rechtskraft_lvg&STYLES=&BBOX={box}&WIDTH=4&HEIGHT=4&QUERY_LAYERS=bplan_rechtskraft_lvg&X=2&Y=2&FORMAT=image/png&INFO_FORMAT=text/html&FEATURE_COUNT=5000&EXCEPTIONS=application/vnd.ogc.se_xml'
-                data = scrape_geoservices_api(url)
-                data.to_csv(f'{output_folder}/bounding_box_{box}.csv', index=False)
+
+                data = scrape_geoservices_api(url = 'https://geoportal.bayern.de/ba-backend/getFeature', easting_northing=row['midpoint'])
+                name = row['name']
+                data.to_csv(f'{output_folder}/building_plans_{name}.csv', index=False)
                 time.sleep(10)
                 break  # Exit the retry loop on success
             
             except AttributeError as ae:
                 time.sleep(10)
                 with open(f'{output_folder}/logs.txt', 'a') as log_file:
-                    log_file.write(f"Box {str(box)}: An error occurred - {str(ae)}\n")
+                    log_file.write(f"Box {name}: An error occurred - {str(ae)}\n")
                 break  # Exit the retry loop on AttributeError
             
             except (requests.exceptions.HTTPError, requests.exceptions.ConnectTimeout, requests.exceptions.ConnectionError, requests.exceptions.SSLError) as he:
@@ -178,24 +203,27 @@ def scrape_bounding_boxes(boxes, max_retries=5, output_folder='geoservices_resul
                     time.sleep(30)
                 else:
                     with open(f'{output_folder}/logs.txt', 'a') as log_file:
-                        log_file.write(f"Box {str(box)}: An error occurred - {str(he)}\n")
+                        log_file.write(f"Box {name}: An error occurred - {str(he)}\n")
                     break  # Exit the retry loop after max retries
 
 
-def scrape_in_batches(bounding_boxes, 
-                      batch_size,
-                      batch_delay,
-                      max_retries,
-                      output_folder):
+def scrape_in_batches(data_gemeinden : pd.DataFrame, 
+                      batch_size : int = 100,
+                      batch_delay : int = 30,
+                      max_retries : int = 5,
+                      output_folder : str = 'geoservices_results',
+                      size_n : int = 100):
     
+    if size_n:
+        data_gemeinden = data_gemeinden.sample(n = size_n)
     
-    for i in range(0, len(bounding_boxes), batch_size):
+    for i in range(0, len(data_gemeinden), batch_size):
 
-        bounding_boxes_batch = bounding_boxes[i:i+batch_size]
+        gemeinden_batch = data_gemeinden[i:i+batch_size]
 
-        print('Running batch '+str(i)+' of '+str(len(bounding_boxes))+' bounding boxes.')
+        print('Running batch '+str(i)+' of '+str(len(data_gemeinden))+' bounding boxes.')
 
-        scrape_bounding_boxes(bounding_boxes_batch,
+        scrape_bounding_boxes(gemeinden_batch,
                           max_retries = max_retries, 
                           output_folder = output_folder)
         

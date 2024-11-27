@@ -1,0 +1,374 @@
+,water_bodies,flooding_risk_prevention_measures,raw_llm_response,id,filename
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",16363,16363_0.jpg
+0,['Nördlicher Stadtgraben'],[],"assistant: ```json
+{
+  ""water_bodies"": [""Nördlicher Stadtgraben""],
+  ""flooding_risk_prevention_measures"": []
+}
+```",52668,52668_26.jpg
+0,[],[],"assistant: Based on the provided excerpt, there is no information given about water bodies or flooding risk prevention measures. The excerpt 'Anlage 4.2' does not contain any details that can be used to identify such features or measures. Therefore, the JSON output would reflect the absence of this information:
+
+```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",52669,52669_274.jpg
+0,[],"['Geländeveränderungen untersagt im Abstand von 00 m zur Grundstücksgrenze und zur freien Flur hin', 'Erdarbeiten im Schutzstreifen der Gasfernleitung sind nur nach vorheriger schriftlicher Zustimmung bei der FGN zulässig', 'Der 8 m breite Schutzstreifen muss für regelmäßige Kontrollen und Streckenbegehungen zugänglich und befahrbar sein', 'Bäume dürfen nur bis zu einem Abstand von 2,0 m zu der Gasleitung gepflanzt werden']","assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": [
+    ""Geländeveränderungen untersagt im Abstand von 00 m zur Grundstücksgrenze und zur freien Flur hin"",
+    ""Erdarbeiten im Schutzstreifen der Gasfernleitung sind nur nach vorheriger schriftlicher Zustimmung bei der FGN zulässig"",
+    ""Der 8 m breite Schutzstreifen muss für regelmäßige Kontrollen und Streckenbegehungen zugänglich und befahrbar sein"",
+    ""Bäume dürfen nur bis zu einem Abstand von 2,0 m zu der Gasleitung gepflanzt werden""
+  ]
+}
+```",68546,68546_12.jpg
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",87784,87784_1.jpg
+0,['Donau'],['Erhaltung des Bestands alter Bäume im Überschwemmungsbereich der Donau'],"assistant: ```json
+{
+  ""water_bodies"": [""Donau""],
+  ""flooding_risk_prevention_measures"": [""Erhaltung des Bestands alter Bäume im Überschwemmungsbereich der Donau""]
+}
+```",50954,50954_98.jpg
+0,"['Ihron', 'Hernrichstelia: Graben']","['Externe Ausgleichsfläche für das Allgemeine Wohngebiet WA2 und das Mischgebiet MI', 'Teil als Wald ausgewiesen', 'Quellzone des Hernrichstelia: Grabens', 'Entwicklungspotential aus Gründen des Fließgewässerschutzes', 'Flächen zum Ausgleich von Eingriffen im Sinne des § 8 und § 9 BNatSchG (in Verbindung mit § 1a BauGB) gesichert']","assistant: ```json
+{
+  ""water_bodies"": [""Ihron"", ""Hernrichstelia: Graben""],
+  ""flooding_risk_prevention_measures"": [
+    ""Externe Ausgleichsfläche für das Allgemeine Wohngebiet WA2 und das Mischgebiet MI"",
+    ""Teil als Wald ausgewiesen"",
+    ""Quellzone des Hernrichstelia: Grabens"",
+    ""Entwicklungspotential aus Gründen des Fließgewässerschutzes"",
+    ""Flächen zum Ausgleich von Eingriffen im Sinne des § 8 und § 9 BNatSchG (in Verbindung mit § 1a BauGB) gesichert""
+  ]
+}
+```",80261,80261_8.jpg
+0,"['Regenwasserkana', 'Regenrückhaltebecken', 'Grundwasserspiegel']","['Anschluss an die öffentliche Trennkanalisation', 'Zuführung des Niederschlagswassers zu einem bestehenden Regenwasserkana', 'Errichtung eines neuen Regenwasserkanals', 'Einleitung des gesammelten Regenwassers in ein vorhandenes Regenrückhaltebecken', 'Hydraulische Berechnungen zur Überprüfung der Kapazität des Regenrückhaltebeckens', 'Anpassungsmaßnahmen an der Notüberlaufschwelle des Beckens zur Generierung zusätzlichen Retentionspuffers', 'Erstellung eines Konzepts zur Niederschlagswasserbeseitigung', 'Beantragung der notwendigen wasserrechtlichen Erlaubnis', 'Berücksichtigung der Grundwasserstände bei der Dimensionierung von Versickerungsanlagen', 'Festlegung eines Bemessungswasserstands über dem mittleren höchsten Grundwasserstand']","assistant: ```json
+{
+  ""water_bodies"": [
+    ""Regenwasserkana"",
+    ""Regenrückhaltebecken"",
+    ""Grundwasserspiegel""
+  ],
+  ""flooding_risk_prevention_measures"": [
+    ""Anschluss an die öffentliche Trennkanalisation"",
+    ""Zuführung des Niederschlagswassers zu einem bestehenden Regenwasserkana"",
+    ""Errichtung eines neuen Regenwasserkanals"",
+    ""Einleitung des gesammelten Regenwassers in ein vorhandenes Regenrückhaltebecken"",
+    ""Hydraulische Berechnungen zur Überprüfung der Kapazität des Regenrückhaltebeckens"",
+    ""Anpassungsmaßnahmen an der Notüberlaufschwelle des Beckens zur Generierung zusätzlichen Retentionspuffers"",
+    ""Erstellung eines Konzepts zur Niederschlagswasserbeseitigung"",
+    ""Beantragung der notwendigen wasserrechtlichen Erlaubnis"",
+    ""Berücksichtigung der Grundwasserstände bei der Dimensionierung von Versickerungsanlagen"",
+    ""Festlegung eines Bemessungswasserstands über dem mittleren höchsten Grundwasserstand""
+  ]
+}
+```",49310,49310_40.jpg
+0,[],[],"assistant: Based on the provided excerpt, there is no explicit mention of water bodies or flooding risk prevention measures. The text appears to be a list of codes, possibly plot numbers, zoning designations, or other planning-related references. Without additional context or information, it is not possible to determine if there are any water bodies or what measures, if any, have been taken against flooding risk.
+
+Here is the JSON output reflecting the lack of information:
+
+```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",79520,79520_0.jpg
+0,"['Ökokonto Schluttenhof (Flurnr. 566, Gemarkung Schaching)']",[],"assistant: ```json
+{
+  ""water_bodies"": [""Ökokonto Schluttenhof (Flurnr. 566, Gemarkung Schaching)""],
+  ""flooding_risk_prevention_measures"": []
+}
+```",52670,52670_39.jpg
+0,[],"['Pflanzung von Bäumen und Baumreihen zur Raumbildung und Abschirmung', 'Pflanzung von Sträuchern zur landschaftlichen Einbindung und klimatischem Ausgleich', 'Verwendung von wasserdurchlässigen Belägen für Stellplätze', 'Seitliche Versickerung über die belebte Bodenzone zur Minimierung der Versiegelung']","assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": [
+    ""Pflanzung von Bäumen und Baumreihen zur Raumbildung und Abschirmung"",
+    ""Pflanzung von Sträuchern zur landschaftlichen Einbindung und klimatischem Ausgleich"",
+    ""Verwendung von wasserdurchlässigen Belägen für Stellplätze"",
+    ""Seitliche Versickerung über die belebte Bodenzone zur Minimierung der Versiegelung""
+  ]
+}
+```",6317,6317_24.jpg
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",78505,78505_5.jpg
+0,['Grundwasser'],[],"assistant: ```json
+{
+  ""water_bodies"": [""Grundwasser""],
+  ""flooding_risk_prevention_measures"": []
+}
+```",49310,49310_93.jpg
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",88101,88101_0.jpg
+0,[],"['Gesetz zur weiteren Verbesserung des Hochwasserschutzes und zur Vereinfachung von Verfahren des Hochwasserschutzes (Hochwasserschutzgesetz II)', 'Vorsorge gegen Oberflächenwasser durch objektbezogene Maßnahmen nach dem Stand der Technik', 'Bauliche Maßnahmen bei Antritt von Grund- bzw. Schichtwasser (z. B. Weiße Wanne)']","assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": [
+    ""Gesetz zur weiteren Verbesserung des Hochwasserschutzes und zur Vereinfachung von Verfahren des Hochwasserschutzes (Hochwasserschutzgesetz II)"",
+    ""Vorsorge gegen Oberflächenwasser durch objektbezogene Maßnahmen nach dem Stand der Technik"",
+    ""Bauliche Maßnahmen bei Antritt von Grund- bzw. Schichtwasser (z. B. Weiße Wanne)""
+  ]
+}
+```",92171,92171_2.jpg
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",86293,86293_15.jpg
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",52669,52669_186.jpg
+0,"['Wassergraben', 'Dettenbach']",['neues Brückenbauwerk'],"assistant: ```json
+{
+  ""water_bodies"": [""Wassergraben"", ""Dettenbach""],
+  ""flooding_risk_prevention_measures"": [""neues Brückenbauwerk""]
+}
+```",80115,80115_11.jpg
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",84166,84166_59.jpg
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",86089,86089_1.jpg
+0,[],[],"assistant: Based on the provided excerpt, there is no explicit mention of water bodies or flooding risk prevention measures. The text appears to be a list of names, possibly street names or locations, and references to documents or codes (e.g., ""B2/87"", ""B2/90"", ""8222""). Without additional context or information, it is not possible to determine if any of these names refer to water bodies or if any of the codes relate to flooding risk prevention measures.
+
+Here is the JSON output reflecting the lack of information:
+
+```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```
+
+To accurately assess the building's measures against flooding risk, a more detailed building plan or additional documentation would be required.",86425,86425_10.jpg
+0,[],"['Anbaufreie Zone zur Bundesstraße B 11 (20,0 m) und zur Staatstraße St 2132 (15,0 m)', 'Bereich für Regenrückhaltebecken']","assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": [""Anbaufreie Zone zur Bundesstraße B 11 (20,0 m) und zur Staatstraße St 2132 (15,0 m)"", ""Bereich für Regenrückhaltebecken""]
+}
+```",65780,65780_1.jpg
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",3853,3853_11.jpg
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",30930,30930_1.jpg
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",90109,90109_2.jpg
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",52669,52669_125.jpg
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",48801,48801_55.jpg
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",86279,86279_54.jpg
+0,['Heilquellenschutzzone'],[],"assistant: ```json
+{
+  ""water_bodies"": [""Heilquellenschutzzone""],
+  ""flooding_risk_prevention_measures"": []
+}
+```",28526,28526_4.jpg
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",6097,6097_5.jpg
+0,['REGEN'],[],"assistant: ```json
+{
+  ""water_bodies"": [""REGEN""],
+  ""flooding_risk_prevention_measures"": []
+}
+```",49014,49014_2.jpg
+0,"['Stockreuther Graben', 'Pillinger Bach']","['Gehölzstrukturen an Gewässern', 'Heckenpflanzungen im Norden, Osten, Süden und Südwesten der Anlage']","assistant: ```json
+{
+  ""water_bodies"": [
+    ""Stockreuther Graben"",
+    ""Pillinger Bach""
+  ],
+  ""flooding_risk_prevention_measures"": [
+    ""Gehölzstrukturen an Gewässern"",
+    ""Heckenpflanzungen im Norden, Osten, Süden und Südwesten der Anlage""
+  ]
+}
+```",78549,78549_16.jpg
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",86108,86108_84.jpg
+0,[],['RUCKHALTEBECKEN'],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": [""RUCKHALTEBECKEN""]
+}
+```",90975,90975_0.jpg
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",52769,52769_131.jpg
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",31682,31682_2.jpg
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",75326,75326_7.jpg
+0,['Vleserquen'],['Hochstuucen <d RetentionsHiäczen'],"assistant: ```json
+{
+  ""water_bodies"": [
+    ""Vleserquen""
+  ],
+  ""flooding_risk_prevention_measures"": [
+    ""Hochstuucen <d RetentionsHiäczen""
+  ]
+}
+```",83862,83862_4.jpg
+0,[],[],"assistant: Based on the provided excerpt, there is no information about water bodies or flooding risk prevention measures. The excerpt appears to be a sequence of characters and numbers that do not convey any meaningful information regarding the building plan or environmental considerations. Therefore, the JSON output would reflect the absence of such information:
+
+```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",51713,51713_58.jpg
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",86279,86279_35.jpg
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",69159,69159_0.jpg
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",48214,48214_0.jpg
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",87198,87198_3.jpg
+0,[],['Das Gelande ist hochwasserfrei'],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": [""Das Gelande ist hochwasserfrei""]
+}
+```",51754,51754_13.jpg
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",52669,52669_246.jpg
+0,['Feuchtfläche'],"['5m breite Hecke und 5m breiter Puffer zur Feuchtfläche, der nicht bebaut werden darf', 'Fangzaun zwischen geplanter Hecke und Feuchtfläche', 'Versickerungsfähige Beläge für Erschließung', 'Begrenzte Versiegelung nur im Bereich der geplanten Gebäude', 'Verwendung von humosem Mutterboden innerhalb des Geltungsbereiches', 'Terrassierung der Sportplätze', 'Orientierung der Fußbodenhöhe des Sportheims an der Geländehöhe des angrenzenden Weges']","assistant: ```json
+{
+  ""water_bodies"": [""Feuchtfläche""],
+  ""flooding_risk_prevention_measures"": [
+    ""5m breite Hecke und 5m breiter Puffer zur Feuchtfläche, der nicht bebaut werden darf"",
+    ""Fangzaun zwischen geplanter Hecke und Feuchtfläche"",
+    ""Versickerungsfähige Beläge für Erschließung"",
+    ""Begrenzte Versiegelung nur im Bereich der geplanten Gebäude"",
+    ""Verwendung von humosem Mutterboden innerhalb des Geltungsbereiches"",
+    ""Terrassierung der Sportplätze"",
+    ""Orientierung der Fußbodenhöhe des Sportheims an der Geländehöhe des angrenzenden Weges""
+  ]
+}
+```",38055,38055_24.jpg
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",48801,48801_160.jpg
+0,[],"['Erhohung des Eingriffs und damit ein zusatzlicher Kompensationsbedarf', 'Kompensationsfaktor gewahlt', 'Maßnahmen zur Grünordnung', 'Vermeidung und Minimierung', 'Ersatzweise Bereitstellung von Ausgleichsflachen im ehemaligen Munitionsdepot bei Altenmarkt']","assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": [
+    ""Erhohung des Eingriffs und damit ein zusatzlicher Kompensationsbedarf"",
+    ""Kompensationsfaktor gewahlt"",
+    ""Maßnahmen zur Grünordnung"",
+    ""Vermeidung und Minimierung"",
+    ""Ersatzweise Bereitstellung von Ausgleichsflachen im ehemaligen Munitionsdepot bei Altenmarkt""
+  ]
+}
+```",74643,74643_17.jpg
+0,[],[],"assistant: ```json
+{
+  ""water_bodies"": [],
+  ""flooding_risk_prevention_measures"": []
+}
+```",54103,54103_17.jpg
+0,['Rosensee'],[],"assistant: ```json
+{
+  ""water_bodies"": [""Rosensee""],
+  ""flooding_risk_prevention_measures"": []
+}
+```",5119,5119_2.jpg
