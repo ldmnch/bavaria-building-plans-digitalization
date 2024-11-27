@@ -7,4 +7,5 @@ building_plans.scrape_in_batches(gemeinden,
                       batch_size = 100,
                       batch_delay = 30, 
                       max_retries = 3,
-                      output_folder = './data/raw/geoservices_results')
+                      output_folder = './data/raw/geoservices_results', 
+                      size_n = None)
