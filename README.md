@@ -37,16 +37,22 @@ bavaria-building-plans-digitalization/
 ssh -i C:\Path\to\PEM\Key greendia-user@IP_Address
 ```
 
-2. Create a screen session to keep the code running in the background:
+2. Activate environment    `bp_digitalization`.
+
+```sh
+source bp_digitalization/bin/activate
+```
+
+3. Create a screen session to keep the code running in the background:
 
 ```sh
 screen
 ```
 
-    If there is already a screen session running (check with `screen -ls`), reattach to it:
+If there is already a screen session running (check with `screen -ls`), reattach to it:
 
 ```sh
 screen -r
 ```
 
-3. To detach from the screen session, press `Ctrl + A` then `D`.
+4. To detach from the screen session, press `Ctrl + A` then `D`.
