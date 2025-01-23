@@ -7,8 +7,9 @@ from tqdm import tqdm
 import random
 import os
 
-def parse_url(url : str = "https://geoportal.bayern.de/ba-backend/getFeature", 
-              easting_northing : list = [4503718.338133049, 5407116.539337536]):
+def parse_url(easting : str,
+              northing : str,
+              url : str = "https://geoportal.bayern.de/ba-backend/getFeature"):
 
     '''
     Reads a url and parses its content as BeautifulSoup object.
@@ -26,8 +27,8 @@ def parse_url(url : str = "https://geoportal.bayern.de/ba-backend/getFeature",
     payload = {
     "id": "26d2b2b8-3944-4a49-aec2-59f827d9aa9e",
     "resolution": 4,
-    "easting": easting_northing[0],
-    "northing": easting_northing[1],
+    "easting": easting,
+    "northing": northing,
     "password": "",
     "srid": "31468",
     "username": ""
@@ -147,9 +148,10 @@ def convert_list_of_results_to_dataframe(list_of_rows):
     return(result_data)
 
 def scrape_geoservices_api(url : str, 
-                           easting_northing : list = [4503718.338133049, 5407116.539337536]):
+                           easting : str, 
+                           northing : str):
 
-    parsed_site = parse_url(url)
+    parsed_site = parse_url(url = url,  easting = easting, northing = northing)
 
     rows_list = scrape_all_tables(parsed_site)
 
@@ -184,10 +186,12 @@ def scrape_bounding_boxes(data_gemeinden,
         while retry_count < max_retries:
             
             try:
-
-                data = scrape_geoservices_api(url = 'https://geoportal.bayern.de/ba-backend/getFeature', easting_northing=row['midpoint'])
-                name = row['name']
-                data.to_csv(f'{output_folder}/building_plans_{name}.csv', index=False)
+                
+                easting = row['easting']
+                northing = row['northing']
+                data = scrape_geoservices_api(url = 'https://geoportal.bayern.de/ba-backend/getFeature', easting = easting, northing=northing)
+                name = row['gem_name']
+                data.to_csv(f'{output_folder}/building_plans_{name}_{easting}_{northing}.csv', index=False)
                 time.sleep(10)
                 break  # Exit the retry loop on success
             

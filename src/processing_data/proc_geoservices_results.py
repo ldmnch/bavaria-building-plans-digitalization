@@ -16,6 +16,6 @@ def generate_dataset_building_plans(input_folder_path,
 
     data = pd.concat(li, axis=0, ignore_index=True)
 
-    data = data.drop_duplicates(subset=data.columns.difference(['id']))
+    data = data.drop_duplicates(subset=data.columns.difference(['URL zur Legende']))
 
-    data.to_csv(f'{output_folder_path}/{output_folder_name}.csv', index_label = 'id')
+    data.to_csv(f'{output_folder_path}/{output_folder_name}.csv')
