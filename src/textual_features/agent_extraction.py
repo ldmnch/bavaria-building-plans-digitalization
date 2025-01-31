@@ -73,7 +73,7 @@ class Llm:
 
             self.llamaindex_llm = AzureOpenAI(
                 engine="gpt-4-1106-preview", model="gpt-4-1106-preview", temperature=0.0,
-                azure_endpoint=os.environ["AZURE_ENDPOINT_GIST_PROJECT_NORWAYEAST"],
+                azure_endpoint=os.getenv("AZURE_ENDPOINT_GIST_PROJECT_NORWAYEAST", "default_value"),
                 # use_azure_ad=True, # only useful for debugging purposes?
                 api_version="2024-02-01",
                 api_key=token_provider(),
@@ -106,7 +106,7 @@ class Llm:
             return -1.0
 
 class BP_Metrics_Getter:
-    """Retrieve emissions from a single document."""
+    """Retrieve metrics from a single document."""
 
     def __init__(self, llm, llm_single_prompt):
         self.llamaindex_llm = llm.llamaindex_llm

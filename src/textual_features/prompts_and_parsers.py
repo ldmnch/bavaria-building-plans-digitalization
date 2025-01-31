@@ -1,13 +1,13 @@
 import sys
 import os
 import pandas as pd
-from datetime import datetime
+
 from llama_index.core.output_parsers import PydanticOutputParser
 from typing import List, Optional, Literal
 from dataclasses import dataclass, field
 from pydantic import BaseModel, Field, conint, confloat
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
+#sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
 
 from helpers.helpers import read_json_to_str
 
@@ -39,7 +39,7 @@ class PromptRoleAndTask:
 class PromptKpiDefinitions:
     """Provides definitions to each KPI in prompt."""
 
-    definitions_string : str = read_json_to_str('../query/definitions.json')
+    definitions_string : str = read_json_to_str('./query/definitions.json')
 
 @dataclass
 class Llm_Extraction_Prompt:

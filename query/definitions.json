@@ -1,4 +1,4 @@
 {
-    "Geschossflächenzahl (GFZ)": "Geschossflächenzahl (GFZ): determines how much floor space can be built on a plot of land.\n",
-    "Grundflächenzahl (GRZ)": "Grundflächenzahl (GRZ):  the proportion of the area of ​​a building plot that can be built up in height. \n"
+    "Geschossflächenzahl (GFZ)": "Geschossflächenzahl (GFZ): represents the ratio of the total floor area of all building stories to the plot area. It controls the horizontal spread of buildings.\n",
+    "Grundflächenzahl (GRZ)": "Grundflächenzahl (GRZ):   represents the proportion of the plot area that can be covered by buildings. It controls the vertical density (i.e., the total built-up floor area).\n"
   }  
