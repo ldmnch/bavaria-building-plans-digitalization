@@ -32,8 +32,6 @@ def create_llm_costs_dict(response):
 
     return llm_costs
 
-# %%
-#os.chdir("../")
 CWD = os.getcwd()
 
 data_dir = os.path.join(CWD, 'data')
@@ -46,22 +44,21 @@ sample_size = 50
 INPUT_FILE_PATH = os.path.join(data_dir, "proc", "building_plans_sample", "test_images", "bp_text.json")
 METADATA_PATH = os.path.join(data_dir, "proc", "building_plans", "metadata","building_plans_metadata.csv")
 
-# specify relevant column names
+#Specify prompt extraction + output file path
+PROMPT_TYPE = 'flooding'
+
+if PROMPT_TYPE == 'construction':
+    OUTPUT_FILE_PATH = os.path.join("data", "proc", "building_plans_sample", "features",  "test_images_info_data_extraction.csv")
+if PROMPT_TYPE == 'flooding':
+    OUTPUT_FILE_PATH = os.path.join("data", "proc", "building_plans_sample", "features",  "test_images_info_data_extraction_flooding.csv")
+
 ID_COLUMN='filename'
 TEXT_COLUMN='content'
 
 # read in data
 bp_text = pd.read_json(INPUT_FILE_PATH)
-metadata_df = pd.read_csv(METADATA_PATH)
 
-# %%
-metadata_bps = metadata_df[metadata_df['Planart'].isin(['qualifizierter Bebauungsplan', 'einfacher Bebauungsplan', 'vorhabenbezogener Bebauungsplan'])]
-
-# %%
 bp_text['id'] = bp_text['filename'].str.extract(r'(\d+)_').astype(int)
-
-# %%
-#input_df = metadata_bps.merge(bp_text)
 
 # %%
 input_df = bp_text
@@ -83,32 +80,31 @@ else:
  
     run_data = input_df
 
-# %%
 llm = Llm(model_name="gpt-4-1106-preview")
-getter = BP_Metrics_Getter(llm = llm, llm_single_prompt = Llm_Extraction_Prompt())
+getter = BP_Metrics_Getter(llm = llm, llm_single_prompt = Llm_Extraction_Prompt(prompt_type = PROMPT_TYPE))
 
-# %%
-
-nest_asyncio.apply()  # Allows nested event loops (needed for Jupyter but not for standalone .py scripts)
-
-async def process_data():
-    results = pd.DataFrame(columns=["id", "output", "llm_prompt_tokens", "llm_completion_tokens", "total_llm_token_count", "total_llm_costs_in_euro"])
+async def run_llm_extraction():
+    
+    results = pd.DataFrame(columns=["id", "filename", "llm_prompt_tokens", "llm_completion_tokens", "total_llm_token_count", "total_llm_costs_in_euro"])
 
     for i, row in run_data.iterrows():
         extraction_results = await getter._bound_get_emissions_from_raw_text(row['content'])
         llm_costs = create_llm_costs_dict(extraction_results)
         llm.token_counter.reset_counts()
 
-        parsed_extractions = getter._parse_to_classes_llm_output(extraction_results)
-
-        row_df = pd.DataFrame({
-            "id": row.get("id", None),  # Ensure ID is included
-            "output": parsed_extractions,
+        parsed_extractions = getter._parse_to_table_llm_output(extraction_results)        
+        row_data = {
+            "id": row.get("id", None),  
+            "filename": row.get("filename", None),
             "llm_prompt_tokens": llm_costs["llm_prompt_tokens"],
             "llm_completion_tokens": llm_costs["llm_completion_tokens"],
             "total_llm_token_count": llm_costs["total_llm_token_count"],
             "total_llm_costs_in_euro": llm_costs["total_llm_costs_in_euro"]
-        })  
+        }
+        
+        row_data.update(parsed_extractions)
+        
+        row_df = pd.DataFrame([row_data])
 
         results = pd.concat([results, row_df], ignore_index=True)
 
@@ -116,5 +112,6 @@ async def process_data():
 
 # Run the async function properly
 if __name__ == "__main__":
-    results = asyncio.run(process_data())  # Ensures proper event loop handling
-    print(results)  # Print or save results
+    results = asyncio.run(run_llm_extraction()) 
+    print(results)  
+    results.to_csv(OUTPUT_FILE_PATH, index=False)

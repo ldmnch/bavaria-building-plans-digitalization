@@ -1,0 +1,12 @@
+id,filename,llm_prompt_tokens,llm_completion_tokens,total_llm_token_count,total_llm_costs_in_euro,hw100,hw10
+695,695_0.jpg,1965,76,2041,0.021854000000000002,value=None,value=None
+807,807_0.jpg,1619,89,1708,0.018771,value=None,value=None
+904,904_0.jpg,1715,102,1817,0.020108,value=None,value=None
+904,904_1.jpg,1385,106,1491,0.016924,value=None,value=None
+904,904_2.jpg,2373,91,2464,0.026369,value=None,value=None
+904,904_3.jpg,1982,85,2067,0.022285,value=None,value=None
+904,904_4.jpg,979,16,995,0.010254000000000001,,
+904,904_5.jpg,922,84,1006,0.011656000000000001,value=None,value=None
+904,904_6.jpg,922,76,998,0.011424,,
+904,904_7.jpg,883,99,982,0.011701000000000001,value=None,value=None
+904,904_8.jpg,1284,103,1387,0.015827,value=None,value=None

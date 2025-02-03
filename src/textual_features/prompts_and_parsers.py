@@ -25,11 +25,31 @@ class GFZ(BaseModel):
         example=1.0
     )
 
+class HW100(BaseModel):
+    value: Optional[float] = Field(
+        None,
+        description="HW100 beschreibt den Hochwasserabfluss, der statistisch einmal in 100 Jahren zu erwarten ist.",
+        example=315.40
+    )
+
+class HW10(BaseModel):
+    value: Optional[float] = Field(
+        None,
+        description="HW10 beschreibt den Hochwasserabfluss, der statistisch einmal in 10 Jahren zu erwarten ist.",
+        example=560.30
+    )
+
 class BuildingMetrics(BaseModel):
     
     grz: Optional[GRZ] = Field(None, description="Grundflächenzahl (GRZ)")
     
     gfz: Optional[GFZ] = Field(None, description="Geschoßflächenzahl (GFZ)")
+
+class FloodingMetrics(BaseModel):
+
+    hw100: Optional[HW100] = Field(None, description="Hochwasserabfluss HW100")
+    
+    hw10: Optional[HW10] = Field(None, description="Hochwasserabfluss HW10")
     
 class PromptRoleAndTask:
     """Describes LLM role and task for prompt."""
@@ -39,7 +59,9 @@ class PromptRoleAndTask:
 class PromptKpiDefinitions:
     """Provides definitions to each KPI in prompt."""
 
-    definitions_string : str = read_json_to_str('./query/definitions.json')
+    def __init__(self, path_to_definitions):
+        self.path_to_definitions = path_to_definitions
+        self.definitions_string : str = read_json_to_str(self.path_to_definitions)
 
 @dataclass
 class Llm_Extraction_Prompt:
@@ -47,36 +69,29 @@ class Llm_Extraction_Prompt:
     The dataclass contains a prompt (=query text).
     Strategy: We make a single query to extract relevant info from BP.
     """
-
-    """The dataclass contains a prompt (=query text) and a parser method for this prompt.
-        Strategy: We make a single query to extract relevant info from BP.
-"""
-
     role: Optional[str] = field(default=PromptRoleAndTask.role)
-    KPIDefinitions: Optional[str] = field(default=PromptKpiDefinitions().definitions_string)
-    #specifications: Optional[str] = field(default=prompt_specifications.specifications)
+    #KPIDefinitions: Optional[str] = field(default=PromptKpiDefinitions().definitions_string)
 
-    def __init__(self, role=None, KPIDefinitions=None#, specifications=None
-                 ):
+    def __init__(self, role=None, prompt_type = 'construction'):
+        
         """Optional parameters allow default values to be loaded from a file if None is provided."""
         if role is None:
             role = PromptRoleAndTask.role  # Default role definition
-        if KPIDefinitions is None:
-            KPIDefinitions = PromptKpiDefinitions().definitions_string  # Default KPI definitions
-#        if specifications is None:
-#            specifications = prompt_specifications.specifications  # Default specifications
-
+        if prompt_type == 'construction':
+            KPIDefinitions = PromptKpiDefinitions(path_to_definitions = './query/construction_definitions.json').definitions_string  
+            output_cls = BuildingMetrics
+        if prompt_type == 'flooding':
+            KPIDefinitions = PromptKpiDefinitions(path_to_definitions = './query/flooding_definitions.json').definitions_string
+            output_cls = FloodingMetrics
+        
         self.query = f'{role}\n{KPIDefinitions}\n\
         Here is the excerpt: \n {{context_str}}'
 
-        self.parser = PydanticOutputParser(output_cls=BuildingMetrics)
+        self.parser = PydanticOutputParser(output_cls=output_cls)
 
     def parse_gpt_output(self, gpt_question_output) -> pd.DataFrame:
         """Extract year, scope, value, and unit gpt_question_output using regular expressions."""
 
         building_metrics = self.parser.parse(gpt_question_output.message.content)
-
-        #parsed_output = pd.DataFrame([entry.dict()
-        #                             for entry in building_metrics.BuildingMetrics])
 
         return(building_metrics)

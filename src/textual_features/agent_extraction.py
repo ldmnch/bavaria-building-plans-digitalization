@@ -73,7 +73,7 @@ class Llm:
 
             self.llamaindex_llm = AzureOpenAI(
                 engine="gpt-4-1106-preview", model="gpt-4-1106-preview", temperature=0.0,
-                azure_endpoint=os.getenv("AZURE_ENDPOINT_GIST_PROJECT_NORWAYEAST", "default_value"),
+                azure_endpoint=os.getenv("AZURE_ENDPOINT_GIST_PROJECT_NORWAYEAST"),
                 # use_azure_ad=True, # only useful for debugging purposes?
                 api_version="2024-02-01",
                 api_key=token_provider(),
@@ -187,11 +187,14 @@ class BP_Metrics_Getter:
     
     def _parse_to_table_llm_output(self, llm_output):
 
-        output_string = str(llm_output)
+        parsed_output = self.llm_single_prompt.parse_gpt_output(llm_output)
 
-        parsed_output = self.llm_single_prompt.parse_gpt_output(output_string)
+        parsed_output_dict ={
+    attr: getattr(parsed_output, attr) if getattr(parsed_output, attr) is not None else None
+    for attr in vars(parsed_output)
+}
 
-        return parsed_output
+        return parsed_output_dict
 
     def _parse_to_classes_llm_output(self, llm_output):
 
