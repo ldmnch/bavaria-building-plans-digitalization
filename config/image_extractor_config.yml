@@ -1,0 +1,30 @@
+---
+Preprocess: true
+Extract: true
+Debug: true
+
+Preprocessing:
+  InputDir: "data/proc/bulding_plans_sample/test_images" # Path to the PDFs
+  OutputDir: "data/nrw/bplan/raw/images" # Path to the images
+  OutputFormat: ".png"
+  FirstPageOnly: true
+  ImagePreprocessorConfig:
+        grey_scale: false
+        remove_noise: false
+        thresholding: false
+        dilate: false
+        erode: false
+        opening: false
+        canny: false
+        deskew: false
+        unsharp_masking: true
+        rotate: false
+
+Extraction:
+    InputDir: "data/proc/bulding_plans_sample/test_images" # Path to the images
+    OutputDir: "data/proc/bulding_plans_sample/test_images/split_images" # Path to the cut images
+    ImageExtractor: # Image extractor config - for model download see README.md
+        cfg_pickle_path: 'models/image_extraction/cfg.pkl' # Path to the pickled config file
+        model_path: 'models/image_extraction/model_final.pth' # Path to the model
+        threshold: 0.7
+        device: 'cpu'
