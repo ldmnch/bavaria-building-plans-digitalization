@@ -36,10 +36,8 @@ sample_size = 50
 
 # specify file path
 INPUT_FILE_PATH = os.path.join(data_dir, "proc", "building_plans_sample", "test_images", "bp_text.json")
-METADATA_PATH = os.path.join(data_dir, "proc", "building_plans", "metadata","building_plans_metadata.csv")
 
-#Specify prompt extraction + output file path
-PROMPT_TYPE = 'flooding'
+PROMPT_TYPE = 'flooding' # Can be flooding or construction depending on the prompt you want to use
 
 if PROMPT_TYPE == 'construction':
     OUTPUT_FILE_PATH = os.path.join("data", "proc", "building_plans_sample", "features",  "test_images_info_data_extraction.csv")

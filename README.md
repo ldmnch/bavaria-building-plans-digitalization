@@ -13,20 +13,16 @@ An overview of the folder structure and files:
 ```
 bavaria-building-plans-digitalization/
 ├── src/                        # Source files
-│   ├── geodata_bayern_scraping         # Scraping Geodata Bayern
-│   ├── geoservices_bayern_scraping     # Scraping Geoservices
 │   ├── pdfs_to_text                    # Extracting text from PDFs
 │   ├── processing_data                 # Data processing
 │   ├── textual_features                # Extracting textual features
-│   ├── visualizations                  # Data visualizations
+│   ├── llm_extraction.py # Main pipeline run file 
 ├── data/                       # Data files
 │   ├── raw/                    # Raw data files
 │   ├── proc/                   # Processed data files
 │   ├── final/                  # Final data files
-├── dictionaries/               # Dictionaries for keyword search
-│   ├── keyword_name_of_keyword_search.json   
 ├── README.md                   # Project documentation
-├── requirements.txt            # List of dependencies
+├── requirements.txt            # List of dependencies, has to be updated 
 ```
 
 ## Running the Project from VM
