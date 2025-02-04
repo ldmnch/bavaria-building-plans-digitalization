@@ -76,11 +76,6 @@ def get_project_directory(path_to_file="src"):
     current_dir = os.getcwd()
     head, tail = os.path.split(current_dir)
 
-    # Is there an automatic way to get the current file name?
-    # import ipyparams
-    # current_file_name = ipyparams.notebook_name
-    # print(current_notebook_name)
-
     if tail == "src":
         return head
     elif tail == path_to_file:
@@ -141,3 +136,19 @@ def list_file_in_folder(folder_path):
     for file in os.listdir(folder_path):
         if os.path.isfile(os.path.join(folder_path, file)):
             return file
+        
+def create_llm_costs_dict(response, llm):
+    
+    """Creates a dictionary with the costs of the LLM."""
+
+    response_usage = response.raw.usage
+    
+    llm_costs = {
+        "llm_prompt_tokens": response_usage.prompt_tokens,
+        "llm_completion_tokens": response_usage.completion_tokens,
+        "total_llm_token_count": response_usage.total_tokens,
+        "total_llm_costs_in_euro": llm.calculate_llm_calling_price(response_usage.prompt_tokens,
+                                                                   response_usage.completion_tokens),
+    }
+
+    return llm_costs
