@@ -7,8 +7,6 @@ from typing import List, Optional, Literal
 from dataclasses import dataclass, field
 from pydantic import BaseModel, Field, conint, confloat
 
-#sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
-
 from helpers.helpers import read_json_to_str
 
 class GRZ(BaseModel):
@@ -25,6 +23,45 @@ class GFZ(BaseModel):
         example=1.0
     )
 
+class EG_FOK(BaseModel):
+
+    value: Optional[conint(ge=0)] = Field(
+        None,
+        description="Die Höhe der Oberkante des fertigen Fußbodens des Erdgeschosses.",
+        example=30 #TODO Ask Sebastian
+    )
+
+    unit: Optional[str] = Field(
+        None,
+        description="Einheiten, in denen die Anzahl der Etagen angegeben ist.",
+        example="cm"
+    )
+
+class FOK(BaseModel):
+
+    value: Optional[conint(ge=0)] = Field(
+        None,
+        description="Die Oberkante des fertigen Fußbodens eines beliebigen Stockwerks des Gebäudes.",
+        example=515 #TODO Ask Sebastian
+    )
+
+    unit: Optional[str] = Field(
+        None,
+        description="Einheiten, in denen die Anzahl der Etagen angegeben ist.",
+        example="cm"
+    )
+
+class BuildingMetrics(BaseModel):
+    
+    grz: Optional[GRZ] = Field(None, description="Grundflächenzahl (GRZ)")
+    
+    gfz: Optional[GFZ] = Field(None, description="Geschoßflächenzahl (GFZ)")
+
+    eg_fok: Optional[EG_FOK] = Field(None, description="Erdgeschoss Fußbodenoberkante (EG-FOK)")
+
+    fok: Optional[List[FOK]] = Field(None, description="Fußbodenoberkante (FOK) für jedes Stockwerk")
+
+
 class HW100(BaseModel):
     value: Optional[float] = Field(
         None,
@@ -39,17 +76,26 @@ class HW10(BaseModel):
         example=560.30
     )
 
-class BuildingMetrics(BaseModel):
-    
-    grz: Optional[GRZ] = Field(None, description="Grundflächenzahl (GRZ)")
-    
-    gfz: Optional[GFZ] = Field(None, description="Geschoßflächenzahl (GFZ)")
+class Grundwasser(BaseModel):
+    value: Optional[str] = Field(
+        None,
+        description="Der Wert des Grundwasserspiegels.",
+        example="0.0"
+    )
+
+    unit: Optional[str] = Field(
+        None,
+        description="Einheiten, in denen der Grundwasserspiegel angegeben ist.",
+        example="m"
+    )
 
 class FloodingMetrics(BaseModel):
 
     hw100: Optional[HW100] = Field(None, description="Hochwasserabfluss HW100")
     
     hw10: Optional[HW10] = Field(None, description="Hochwasserabfluss HW10")
+
+    grundwasser: Optional[Grundwasser] = Field(None, description="Grundwasserspiegel")
     
 class PromptRoleAndTask:
     """Describes LLM role and task for prompt."""
@@ -70,7 +116,6 @@ class Llm_Extraction_Prompt:
     Strategy: We make a single query to extract relevant info from BP.
     """
     role: Optional[str] = field(default=PromptRoleAndTask.role)
-    #KPIDefinitions: Optional[str] = field(default=PromptKpiDefinitions().definitions_string)
 
     def __init__(self, role=None, prompt_type = 'construction'):
         

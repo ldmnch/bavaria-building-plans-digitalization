@@ -1,12 +1,12 @@
-id,filename,llm_prompt_tokens,llm_completion_tokens,total_llm_token_count,total_llm_costs_in_euro,grz,gfz
-695,695_0.jpg,1973,134,2107,0.023616,0.35,0.35
-807,807_0.jpg,1627,40,1667,0.01743,0.6,1.0
-904,904_0.jpg,1723,120,1843,0.020710000000000003,0.6,2.0
-904,904_1.jpg,1393,119,1512,0.017381,,
-904,904_2.jpg,2381,122,2503,0.027347999999999997,,
-904,904_3.jpg,1990,123,2113,0.023467000000000002,,
-904,904_4.jpg,987,40,1027,0.01103,0.6,2.0
-904,904_5.jpg,930,108,1038,0.012432000000000002,,
-904,904_6.jpg,930,117,1047,0.012693000000000001,,
-904,904_7.jpg,891,105,996,0.011955,,
-904,904_8.jpg,1292,120,1412,0.0164,,
+id,filename,llm_prompt_tokens,llm_completion_tokens,total_llm_token_count,total_llm_costs_in_euro,grz,gfz,eg_fok,fok
+695,695_0.jpg,2517,164,2681,0.029925999999999998,value=None,value=None,value=None unit=None,
+807,807_0.jpg,2171,238,2409,0.028612,value=0.6,value=1.0,,
+904,904_0.jpg,2267,55,2322,0.024265,value=0.6,value=2.0,,
+904,904_1.jpg,1937,215,2152,0.025605000000000003,value=None,value=None,value=None unit=None,
+904,904_2.jpg,2925,196,3121,0.034934,value=None,value=None,value=None unit=None,
+904,904_3.jpg,2534,174,2708,0.030385999999999996,value=None,value=None,value=None unit=None,
+904,904_4.jpg,1531,224,1755,0.021806,value=0.6,value=2.0,value=None unit=None,
+904,904_5.jpg,1474,188,1662,0.020192,value=None,value=None,value=None unit=None,
+904,904_6.jpg,1474,164,1638,0.019496,value=None,value=None,value=None unit=None,
+904,904_7.jpg,1435,187,1622,0.019773000000000002,value=None,value=None,value=None unit=None,
+904,904_8.jpg,1836,172,2008,0.023348,value=None,value=None,value=None unit=None,
