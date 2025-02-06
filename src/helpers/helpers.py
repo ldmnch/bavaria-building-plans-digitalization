@@ -30,38 +30,6 @@ def remove_decimal_commas_in_numbers(raw_number: str) -> str:
 
     return res
 
-
-def expand_grid(data_dict):
-    """
-    Create a dataframe from all combinations of provided lists or arrays.
-
-    This function takes a dictionary of lists or arrays and computes the cartesian product of these lists or arrays.
-    Each unique combination of elements will form a row in the resulting dataframe. The keys of the dictionary will
-    be used as column names in the dataframe.
-
-    Parameters:
-    data_dict (dict): A dictionary where keys are column names and values are lists or arrays containing data.
-
-    Returns:
-    pd.DataFrame: A pandas DataFrame containing the cartesian product of the provided lists or arrays.
-
-    Example:
-        data_dict = {'height': [60, 70], 'weight': [100, 150, 200]}
-
-        expand_grid(data_dict)
-
-       height  weight
-    0      60     100
-    1      60     150
-    2      60     200
-    3      70     100
-    4      70     150
-    5      70     200
-    """
-    rows = itertools.product(*data_dict.values())
-    return pd.DataFrame.from_records(rows, columns=data_dict.keys())
-
-
 def get_project_directory(path_to_file="src"):
     """
     Problem solved here (poor solution): when using Jupyter Notebooks the working directory is the path of the Jupyter Notebook,
@@ -152,3 +120,18 @@ def create_llm_costs_dict(response, llm):
     }
 
     return llm_costs
+
+def flatten_object(obj):
+    """Flattens an object's attributes into a dictionary with meaningful column names."""
+    flattened_data = {}
+
+    for key, value in obj.__dict__.items():
+        if value is None:
+            flattened_data[key] = None  # Keep None values
+        elif hasattr(value, '__dict__'):  # If it's an object, extract attributes
+            for attr, attr_value in value.__dict__.items():
+                flattened_data[f"{key}_{attr}"] = attr_value
+        else:
+            flattened_data[key] = value  # Otherwise, store the value directly
+
+    return flattened_data

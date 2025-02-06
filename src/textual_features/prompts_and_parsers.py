@@ -83,11 +83,11 @@ class Grundwasser(BaseModel):
         example="0.0"
     )
 
-    unit: Optional[str] = Field(
-        None,
-        description="Einheiten, in denen der Grundwasserspiegel angegeben ist.",
-        example="m"
-    )
+    #unit: Optional[str] = Field(
+    #    None,
+    #    description="Einheiten, in denen der Grundwasserspiegel angegeben ist.",
+    #    example="m"
+    #)
 
 class FloodingMetrics(BaseModel):
 
