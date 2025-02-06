@@ -23,17 +23,37 @@ class GFZ(BaseModel):
         example=1.0
     )
 
-class EG_FOK(BaseModel):
+class BuildingSealing(BaseModel):
+    
+    grz: Optional[GRZ] = Field(None, description="Grundflächenzahl (GRZ)")
+    
+    gfz: Optional[GFZ] = Field(None, description="Geschoßflächenzahl (GFZ)")
+
+class GOK(BaseModel):
 
     value: Optional[conint(ge=0)] = Field(
         None,
-        description="Die Höhe der Oberkante des fertigen Fußbodens des Erdgeschosses.",
-        example=30 #TODO Ask Sebastian
+        description="Der numerische Wert von GOK, oder 'null' falls nicht vorhanden.",
+        example=5 
     )
 
     unit: Optional[str] = Field(
         None,
-        description="Einheiten, in denen die Anzahl der Etagen angegeben ist.",
+        description="Die Maßeinheit für den numerischen Wert, oder 'null' falls nicht vorhanden.",
+        example="m"
+    )
+
+class EG_FOK(BaseModel):
+
+    value: Optional[conint(ge=0)] = Field(
+        None,
+        description="Der numerische Wert von EG FOK, oder 'null' falls nicht vorhanden.",
+        example=30 #
+    )
+
+    unit: Optional[str] = Field(
+        None,
+        description="Die Maßeinheit für den numerischen Wert, oder 'null' falls nicht vorhanden.",
         example="cm"
     )
 
@@ -41,25 +61,23 @@ class FOK(BaseModel):
 
     value: Optional[conint(ge=0)] = Field(
         None,
-        description="Die Oberkante des fertigen Fußbodens eines beliebigen Stockwerks des Gebäudes.",
-        example=515 #TODO Ask Sebastian
+        description="Der numerische Wert von FOK, oder 'null' falls nicht vorhanden.",
+        example=5
     )
 
     unit: Optional[str] = Field(
         None,
-        description="Einheiten, in denen die Anzahl der Etagen angegeben ist.",
+        description="Die Maßeinheit für den numerischen Wert, oder 'null' falls nicht vorhanden.",
         example="cm"
     )
 
-class BuildingMetrics(BaseModel):
-    
-    grz: Optional[GRZ] = Field(None, description="Grundflächenzahl (GRZ)")
-    
-    gfz: Optional[GFZ] = Field(None, description="Geschoßflächenzahl (GFZ)")
+class BuildingFloors(BaseModel):
+
+    gok: Optional[GOK] = Field(None, description="Geländeoberkante (GOK) für jedes Stockwerk")
 
     eg_fok: Optional[EG_FOK] = Field(None, description="Erdgeschoss Fußbodenoberkante (EG-FOK)")
 
-    fok: Optional[List[FOK]] = Field(None, description="Fußbodenoberkante (FOK) für jedes Stockwerk")
+    fok: Optional[FOK] = Field(None, description="Fußbodenoberkante (FOK) für jedes Stockwerk")
 
 
 class HW100(BaseModel):
@@ -100,7 +118,7 @@ class FloodingMetrics(BaseModel):
 class PromptRoleAndTask:
     """Describes LLM role and task for prompt."""
 
-    role: str = "You are a helpful enviromental city planner. \n Based on the excerpt from a building plan provided below, we would like to extract following information.\n"
+    role: str = "Sie sind ein hilfsbereiter Umwelt-Stadtplaner. \n Anhand des untenstehenden Auszugs aus einem Bebauungsplan möchten wir folgende Informationen entnehmen.\n"
 
 class PromptKpiDefinitions:
     """Provides definitions to each KPI in prompt."""
@@ -122,12 +140,16 @@ class Llm_Extraction_Prompt:
         """Optional parameters allow default values to be loaded from a file if None is provided."""
         if role is None:
             role = PromptRoleAndTask.role  # Default role definition
-        if prompt_type == 'construction':
-            KPIDefinitions = PromptKpiDefinitions(path_to_definitions = './query/construction_definitions.json').definitions_string  
-            output_cls = BuildingMetrics
+        if prompt_type == 'sealing':
+            KPIDefinitions = PromptKpiDefinitions(path_to_definitions = './query/sealing_definitions.json').definitions_string  
+            output_cls = BuildingSealing
         if prompt_type == 'flooding':
             KPIDefinitions = PromptKpiDefinitions(path_to_definitions = './query/flooding_definitions.json').definitions_string
             output_cls = FloodingMetrics
+        if prompt_type == 'floors':
+            KPIDefinitions = PromptKpiDefinitions(path_to_definitions = './query/construction_definitions.json').definitions_string
+            output_cls = BuildingFloors
+
         
         self.query = f'{role}\n{KPIDefinitions}\n\
         Here is the excerpt: \n {{context_str}}'
