@@ -10,39 +10,23 @@ from textual_features.agent_extraction import Llm, BP_Metrics_Getter
 from textual_features.prompts_and_parsers import Llm_Extraction_Prompt
 from textual_features.extraction_pipeline import Pipeline
 
-def create_llm_costs_dict(response):
-    
-    """Creates a dictionary with the costs of the LLM."""
-
-    response_usage = response.raw.usage
-    
-    llm_costs = {
-        "llm_prompt_tokens": response_usage.prompt_tokens,
-        "llm_completion_tokens": response_usage.completion_tokens,
-        "total_llm_token_count": response_usage.total_tokens,
-        "total_llm_costs_in_euro": llm.calculate_llm_calling_price(response_usage.prompt_tokens,
-                                                                   response_usage.completion_tokens),
-    }
-
-    return llm_costs
-
 CWD = os.getcwd()
 
 data_dir = os.path.join(CWD, 'data')
 
 #Specify mode (working with a sample or all the files?)
-sample_mode = False 
+sample_mode = True 
 sample_size = 50
 
 # specify file path
-INPUT_FILE_PATH = os.path.join(data_dir, "proc", "building_plans_sample", "test_images", "bp_text.json")
+INPUT_FILE_PATH = os.path.join(data_dir, "proc", "building_plans_sample", "bp_text.json")
 
 PROMPT_TYPE = 'flooding' # Can be flooding or construction depending on the prompt you want to use
 
 if PROMPT_TYPE == 'construction':
-    OUTPUT_FILE_PATH = os.path.join("data", "proc", "building_plans_sample", "features",  "test_images_info_data_extraction.csv")
+    OUTPUT_FILE_PATH = os.path.join("data", "proc", "building_plans_sample", "features",  "info_data_extraction.csv")
 if PROMPT_TYPE == 'flooding':
-    OUTPUT_FILE_PATH = os.path.join("data", "proc", "building_plans_sample", "features",  "test_images_info_data_extraction_flooding.csv")
+    OUTPUT_FILE_PATH = os.path.join("data", "proc", "building_plans_sample", "features",  "info_data_extraction_flooding.csv")
 
 ID_COLUMN='filename'
 TEXT_COLUMN='content'
