@@ -97,11 +97,8 @@ def download_pdfs(link: str,
 def run_pdf_downloader(input_df: pd.DataFrame,
                        id_column: str,
                        link_column: str,
-                       date_column: str,
-                       start_date: str,
-                       end_date: str,
                        output_folder : str,
-                       sample_n: int = None
+                       sample: bool = False
                        ):
     """
     This function takes as input a dataframe with the links to the PDFs and downloads them to the output folder.
@@ -111,9 +108,8 @@ def run_pdf_downloader(input_df: pd.DataFrame,
         input_df (pd.DataFrame): DataFrame that contains the links to the PDFs.
         id_column (str): Name of ID column
         link_column (str): Column that contains the links
-        date_column (str): Column that contains the dates
         output_folder (str): Path to the folder where the PDFs will be saved
-        sample_n (int): Number of rows to sample from the input_df. If None, all rows are used.
+        sample (bool): Number of rows to sample from the input_df. If None, all rows are used.
 
     """
 
@@ -121,10 +117,9 @@ def run_pdf_downloader(input_df: pd.DataFrame,
     error_links = []
     error_ids = []
 
-    input_df = filtering_useful_data(data = input_df, date_column = date_column, start_date=start_date, end_date=end_date)
-
-    if sample_n:
-        input_df = input_df.sample(n=sample_n, random_state=912)
+    if sample:
+        input_df = input_df.groupby(['bplan_date_category', 'flooding_risk', 'ROR']).apply(lambda x: x.sample(min(len(x), 10)))
+        input_df = input_df.reset_index(drop=True)
 
     # Check if the output folder exists, if not creates it
     if not os.path.exists(output_folder):
@@ -132,16 +127,24 @@ def run_pdf_downloader(input_df: pd.DataFrame,
 
     # Iterate over rows of the dataframe
     # Loop through the DataFrame rows
-    for index, row in tqdm(input_df.iterrows(), total=len(input_df)):
-        link = row[link_column]
-        object_id = str(row[id_column])  # Assuming 'id_column' holds the ID of the BP
-        # Download PDFs and collect errors
-        error_links_single, error_ids_single = download_pdfs(link=link,
-                                                            object_id=object_id,
-                                                            output_folder=output_folder)
-        # Extend the error lists
-        error_links.extend(error_links_single)
-        error_ids.extend(error_ids_single)
+    for (old_bplan, flooding_risk, ROR), group in tqdm(input_df.groupby(['bplan_date_category', 'flooding_risk', 'ROR']), 
+                                                       total = len(input_df.groupby(['bplan_date_category', 'flooding_risk', 'ROR']))):
+        for index, row in group.iterrows():
+            link = row[link_column]
+            object_id = str(row[id_column])
+
+            # Try downloading
+            error_links_single, error_ids_single = download_pdfs(link=link, object_id=object_id, output_folder=output_folder)
+
+            # If success (no errors), move to the next group
+            if not error_links_single:
+                #print(f"✅ Successfully downloaded: {link} ({old_bplan}, {flooding_risk}, {ROR})")
+                break  # Move to the next group
+
+            # If failure, try next link in the same group
+            #print(f"❌ Failed: {link}, trying next in group...")
+            error_links.extend(error_links_single)
+            error_ids.extend(error_ids_single)
 
     errors_df = pd.DataFrame.from_dict({'objectid': error_ids,
                                         'scanurl': error_links})
