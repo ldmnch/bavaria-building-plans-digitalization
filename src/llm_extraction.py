@@ -15,18 +15,20 @@ CWD = os.getcwd()
 data_dir = os.path.join(CWD, 'data')
 
 #Specify mode (working with a sample or all the files?)
-sample_mode = True 
+sample_mode = False 
 sample_size = 50
 
 # specify file path
-INPUT_FILE_PATH = os.path.join(data_dir, "proc", "building_plans_sample", "bp_text.json")
+INPUT_FILE_PATH = os.path.join(data_dir, "proc", "building_plans_sample", "test_images", "bp_text.json")
 
-PROMPT_TYPE = 'flooding' # Can be flooding or construction depending on the prompt you want to use
+PROMPT_TYPE = 'sealing' # Can be sealing, floors or flooding depending on the prompt you want to use
 
-if PROMPT_TYPE == 'construction':
-    OUTPUT_FILE_PATH = os.path.join("data", "proc", "building_plans_sample", "features",  "info_data_extraction.csv")
+if PROMPT_TYPE == 'sealing':
+    OUTPUT_FILE_PATH = os.path.join("data", "proc", "building_plans_sample", "features",  "test_images_info_data_extraction.csv")
 if PROMPT_TYPE == 'flooding':
-    OUTPUT_FILE_PATH = os.path.join("data", "proc", "building_plans_sample", "features",  "info_data_extraction_flooding.csv")
+    OUTPUT_FILE_PATH = os.path.join("data", "proc", "building_plans_sample", "features",  "test_images_info_data_extraction_flooding.csv")
+if PROMPT_TYPE == 'floors':
+    OUTPUT_FILE_PATH = os.path.join("data", "proc", "building_plans_sample", "features",  "test_images_info_data_extraction_floors.csv")
 
 ID_COLUMN='filename'
 TEXT_COLUMN='content'
