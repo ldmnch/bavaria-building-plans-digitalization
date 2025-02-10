@@ -1,4 +1,4 @@
-{   "Geländeoberkante (GOK)" : "Geländeoberkante (GOK): Die GOK bezieht sich die Oberfläche des Geländes. \n",
-    "Erdgeschossfußbodenoberkante (EG FOK)": "Erdgeschossfußbodenoberkante (EG FOK): Die EG FOK bezieht sich auf die Oberkante des fertigen Fußbodens im Erdgeschoss. \n",
-    "Fußbodenoberkante (FOK)": "Fußbodenoberkante (FOK): Die FOK bezieht sich auf die Oberkante des fertigen Fußbodens jeder Etage im Gebäude. Weitere typische Kürzel: OKFFB, DOK, FFOK \n"
+{   "Geländeoberkante (GOK)" : "Geländeoberkante (GOK): Die GOK bezieht sich die Oberfläche des Geländes. Sie wird in Metern oder Zentimetern über Normalnull/Normalhöhennull gemessen. \n",
+    "Erdgeschossfußbodenoberkante (EG FOK)": "Erdgeschossfußbodenoberkante (EG FOK): Die EG FOK bezieht sich auf die Oberkante des fertigen Fußbodens im Erdgeschoss. Sie wird in Metern oder Zentimetern über Normalnull/Normalhöhennull gemessen. \n",
+    "Fußbodenoberkante (FOK)": "Fußbodenoberkante (FOK): Die FOK bezieht sich auf die Oberkante des fertigen Fußbodens jeder Etage im Gebäude. Weitere typische Kürzel: OKFFB, DOK, FFOK. Sie wird in Metern oder Zentimetern über Normalnull/Normalhöhennull gemessen. \n"
     }  
