@@ -1,4 +1,4 @@
-{
-    "Geschossflächenzahl (GFZ)": "Geschossflächenzahl (GFZ): represents the ratio of the total floor area of all building stories to the plot area. It controls the horizontal spread of buildings.\n",
-    "Grundflächenzahl (GRZ)": "Grundflächenzahl (GRZ):   represents the proportion of the plot area that can be covered by buildings. It controls the vertical density (i.e., the total built-up floor area).\n"
-  }  
+{   "Geländeoberkante (GOK)" : "Geländeoberkante (GOK): Die GOK bezieht sich die Oberfläche des Geländes. Sie wird in Metern oder Zentimetern über Normalnull/Normalhöhennull gemessen. \n",
+    "Erdgeschossfußbodenoberkante (EG FOK)": "Erdgeschossfußbodenoberkante (EG FOK): Die EG FOK bezieht sich auf die Oberkante des fertigen Fußbodens im Erdgeschoss. Sie wird in Metern oder Zentimetern über Normalnull/Normalhöhennull gemessen. \n",
+    "Fußbodenoberkante (FOK)": "Fußbodenoberkante (FOK): Die FOK bezieht sich auf die Oberkante des fertigen Fußbodens jeder Etage im Gebäude. Weitere typische Kürzel: OKFFB, DOK, FFOK. Sie wird in Metern oder Zentimetern über Normalnull/Normalhöhennull gemessen. \n"
+    }  

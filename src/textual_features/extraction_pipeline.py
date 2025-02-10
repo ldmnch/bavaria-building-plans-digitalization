@@ -24,7 +24,7 @@ class Pipeline:
             llm_costs = create_llm_costs_dict(extraction_results, llm)
             llm.token_counter.reset_counts()
 
-            parsed_extractions = getter._parse_to_table_llm_output(extraction_results)        
+            parsed_extractions = getter._parse_to_dict_llm_output(extraction_results)        
             
             row_data = {
                 "id": row.get("id", None),  

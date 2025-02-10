@@ -97,9 +97,9 @@ def download_pdfs(link: str,
 def run_pdf_downloader(input_df: pd.DataFrame,
                        id_column: str,
                        link_column: str,
-                       date_column: str,
-                       start_date: str,
-                       end_date: str,
+                       #date_column: str,
+                       #start_date: str,
+                       #end_date: str,
                        output_folder : str,
                        sample_n: int = None
                        ):
@@ -121,7 +121,7 @@ def run_pdf_downloader(input_df: pd.DataFrame,
     error_links = []
     error_ids = []
 
-    input_df = filtering_useful_data(data = input_df, date_column = date_column, start_date=start_date, end_date=end_date)
+    #input_df = filtering_useful_data(data = input_df, date_column = date_column, start_date=start_date, end_date=end_date)
 
     if sample_n:
         input_df = input_df.sample(n=sample_n, random_state=912)
@@ -130,18 +130,25 @@ def run_pdf_downloader(input_df: pd.DataFrame,
     if not os.path.exists(output_folder):
         os.mkdir(output_folder)
 
-    # Iterate over rows of the dataframe
-    # Loop through the DataFrame rows
-    for index, row in tqdm(input_df.iterrows(), total=len(input_df)):
-        link = row[link_column]
-        object_id = str(row[id_column])  # Assuming 'id_column' holds the ID of the BP
-        # Download PDFs and collect errors
-        error_links_single, error_ids_single = download_pdfs(link=link,
-                                                            object_id=object_id,
-                                                            output_folder=output_folder)
-        # Extend the error lists
-        error_links.extend(error_links_single)
-        error_ids.extend(error_ids_single)
+
+# Iterate over stratified groups, trying one link per group
+    for (old_bplan, flooding_risk, ROR), group in input_df.groupby(['old_bplan', 'flooding_risk', 'ROR']):
+        for index, row in group.iterrows():
+            link = row[link_column]
+            object_id = str(row['id'])
+
+            # Try downloading
+            error_links_single, error_ids_single = download_pdfs(link=link, object_id=object_id, output_folder=output_folder)
+
+            # If success (no errors), move to the next group
+            if not error_links_single:
+                print(f"✅ Successfully downloaded: {link} ({old_bplan}, {flooding_risk}, {ROR})")
+                break  # Move to the next group
+
+            # If failure, try next link in the same group
+            print(f"❌ Failed: {link}, trying next in group...")
+            error_links.extend(error_links_single)
+            error_ids.extend(error_ids_single)
 
     errors_df = pd.DataFrame.from_dict({'objectid': error_ids,
                                         'scanurl': error_links})

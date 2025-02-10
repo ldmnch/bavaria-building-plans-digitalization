@@ -7,8 +7,6 @@ from typing import List, Optional, Literal
 from dataclasses import dataclass, field
 from pydantic import BaseModel, Field, conint, confloat
 
-#sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
-
 from helpers.helpers import read_json_to_str
 
 class GRZ(BaseModel):
@@ -25,6 +23,63 @@ class GFZ(BaseModel):
         example=1.0
     )
 
+class BuildingSealing(BaseModel):
+    
+    grz: Optional[GRZ] = Field(None, description="Grundflächenzahl (GRZ)")
+    
+    gfz: Optional[GFZ] = Field(None, description="Geschoßflächenzahl (GFZ)")
+
+class GOK(BaseModel):
+
+    value: Optional[conint(ge=0)] = Field(
+        None,
+        description="Der numerische Wert von GOK, oder 'null' falls nicht vorhanden.",
+        example=5 
+    )
+
+    unit: Optional[str] = Field(
+        None,
+        description="Die Maßeinheit für den numerischen Wert, oder 'null' falls nicht vorhanden.",
+        example="m"
+    )
+
+class EG_FOK(BaseModel):
+
+    value: Optional[conint(ge=0)] = Field(
+        None,
+        description="Der numerische Wert von EG FOK, oder 'null' falls nicht vorhanden.",
+        example=30 #
+    )
+
+    unit: Optional[str] = Field(
+        None,
+        description="Die Maßeinheit für den numerischen Wert, oder 'null' falls nicht vorhanden.",
+        example="cm"
+    )
+
+class FOK(BaseModel):
+
+    value: Optional[conint(ge=0)] = Field(
+        None,
+        description="Der numerische Wert von FOK, oder 'null' falls nicht vorhanden.",
+        example=5
+    )
+
+    unit: Optional[str] = Field(
+        None,
+        description="Die Maßeinheit für den numerischen Wert, oder 'null' falls nicht vorhanden.",
+        example="cm"
+    )
+
+class BuildingFloors(BaseModel):
+
+    gok: Optional[GOK] = Field(None, description="Geländeoberkante (GOK) für jedes Stockwerk")
+
+    eg_fok: Optional[EG_FOK] = Field(None, description="Erdgeschoss Fußbodenoberkante (EG-FOK)")
+
+    fok: Optional[FOK] = Field(None, description="Fußbodenoberkante (FOK) für jedes Stockwerk")
+
+
 class HW100(BaseModel):
     value: Optional[float] = Field(
         None,
@@ -39,22 +94,31 @@ class HW10(BaseModel):
         example=560.30
     )
 
-class BuildingMetrics(BaseModel):
-    
-    grz: Optional[GRZ] = Field(None, description="Grundflächenzahl (GRZ)")
-    
-    gfz: Optional[GFZ] = Field(None, description="Geschoßflächenzahl (GFZ)")
+class Grundwasser(BaseModel):
+    value: Optional[str] = Field(
+        None,
+        description="Der Wert des Grundwasserspiegels.",
+        example="0.0"
+    )
+
+    #unit: Optional[str] = Field(
+    #    None,
+    #    description="Einheiten, in denen der Grundwasserspiegel angegeben ist.",
+    #    example="m"
+    #)
 
 class FloodingMetrics(BaseModel):
 
     hw100: Optional[HW100] = Field(None, description="Hochwasserabfluss HW100")
     
     hw10: Optional[HW10] = Field(None, description="Hochwasserabfluss HW10")
+
+    grundwasser: Optional[Grundwasser] = Field(None, description="Grundwasserspiegel")
     
 class PromptRoleAndTask:
     """Describes LLM role and task for prompt."""
 
-    role: str = "You are a helpful enviromental city planner. \n Based on the excerpt from a building plan provided below, we would like to extract following information.\n"
+    role: str = "Sie sind ein hilfsbereiter Umwelt-Stadtplaner. \n Anhand des untenstehenden Auszugs aus einem Bebauungsplan möchten wir folgende Informationen entnehmen.\n"
 
 class PromptKpiDefinitions:
     """Provides definitions to each KPI in prompt."""
@@ -70,19 +134,22 @@ class Llm_Extraction_Prompt:
     Strategy: We make a single query to extract relevant info from BP.
     """
     role: Optional[str] = field(default=PromptRoleAndTask.role)
-    #KPIDefinitions: Optional[str] = field(default=PromptKpiDefinitions().definitions_string)
 
     def __init__(self, role=None, prompt_type = 'construction'):
         
         """Optional parameters allow default values to be loaded from a file if None is provided."""
         if role is None:
             role = PromptRoleAndTask.role  # Default role definition
-        if prompt_type == 'construction':
-            KPIDefinitions = PromptKpiDefinitions(path_to_definitions = './query/construction_definitions.json').definitions_string  
-            output_cls = BuildingMetrics
+        if prompt_type == 'sealing':
+            KPIDefinitions = PromptKpiDefinitions(path_to_definitions = './query/sealing_definitions.json').definitions_string  
+            output_cls = BuildingSealing
         if prompt_type == 'flooding':
             KPIDefinitions = PromptKpiDefinitions(path_to_definitions = './query/flooding_definitions.json').definitions_string
             output_cls = FloodingMetrics
+        if prompt_type == 'floors':
+            KPIDefinitions = PromptKpiDefinitions(path_to_definitions = './query/construction_definitions.json').definitions_string
+            output_cls = BuildingFloors
+
         
         self.query = f'{role}\n{KPIDefinitions}\n\
         Here is the excerpt: \n {{context_str}}'

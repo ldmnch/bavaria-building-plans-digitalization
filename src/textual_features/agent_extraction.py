@@ -24,6 +24,7 @@ from llama_index.core import PromptTemplate
 from llama_index.core.callbacks import CallbackManager, TokenCountingHandler
 from llama_index.core.query_pipeline import QueryPipeline, FnComponent
 from mimetypes import guess_type
+from helpers.helpers import flatten_object
 
 from typing import List, Optional, Literal
 
@@ -185,14 +186,11 @@ class BP_Metrics_Getter:
 
         return raw_response
     
-    def _parse_to_table_llm_output(self, llm_output):
+    def _parse_to_dict_llm_output(self, llm_output):
 
         parsed_output = self.llm_single_prompt.parse_gpt_output(llm_output)
 
-        parsed_output_dict ={
-    attr: getattr(parsed_output, attr) if getattr(parsed_output, attr) is not None else None
-    for attr in vars(parsed_output)
-}
+        parsed_output_dict = flatten_object(parsed_output)
 
         return parsed_output_dict
 
