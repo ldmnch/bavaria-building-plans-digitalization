@@ -2,10 +2,9 @@ import os
 import pandas as pd
 import random
 import easyocr
-#import tika
+import tqdm 
 
 from loguru import logger
-#from tika import parser, language
 
 def pdf_parser_from_path(pdf_path: str,
                          reader: easyocr.Reader) -> dict:
@@ -61,11 +60,9 @@ def pdf_parser_from_folder(folder_path: str,
     # define empty df to store parsed result
     parsed_data = []
 
-    #tika.initVM()
-
     # iterate over all files in folder
-    for pdf_file in pdf_files:
-        logger.info(f"Parsing file: {pdf_file}")
+    for pdf_file in tqdm(pdf_files, total=len(pdf_files)):
+        #logger.info(f"Parsing file: {pdf_file}")
         pdf_path = os.path.join(folder_path, pdf_file)
 
         # apply parser function
