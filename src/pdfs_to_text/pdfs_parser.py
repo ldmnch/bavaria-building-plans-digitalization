@@ -2,8 +2,8 @@ import os
 import pandas as pd
 import random
 import easyocr
-import tqdm 
-
+import gc
+from tqdm import tqdm
 from loguru import logger
 
 def pdf_parser_from_path(pdf_path: str,
@@ -70,6 +70,9 @@ def pdf_parser_from_folder(folder_path: str,
         parsed_data.append({
             "filename": pdf_file,
             "content": parsed_info["content"]})
+        
+        del parsed_info  
+        gc.collect()  # Force garbage collection to release RAM
 
     logger.info("Parsing done.")
     # save as df and convert 'content' to string
