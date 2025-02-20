@@ -3,150 +3,123 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 import requests
-from tqdm import tqdm
+import asyncio
+import aiohttp
+from aiohttp import ClientSession
+import os
+import pandas as pd
+from tqdm.asyncio import tqdm
 
-def parse_date(date_string):
+async def is_downloadable(url: str, session: ClientSession) -> bool:
+    """Check if the URL contains downloadable content."""
     try:
-        return pd.to_datetime(date_string)
-    except ValueError:
-        return np.nan
-
-
-def is_downloadable(url):
-    """
-    Does the url contain a downloadable resource?
-    """
-    h = requests.head(url, allow_redirects=True, timeout=3)
-    header = h.headers
-    content_type = header.get('content-type')
-    if 'text' in content_type.lower() or 'html' in content_type.lower():
+        async with session.head(url) as response:
+            return 'Content-Disposition' in response.headers or 'application/pdf' in response.headers.get('Content-Type', '')
+    except Exception:
         return False
-    return True
+
+async def download_pdf(session, link, object_id, output_folder, timeout_seconds=120):
+    """Asynchronously download a PDF and save it to the output folder."""
+    error = None
+    try:
+        if await is_downloadable(link, session):
+            # Attempt to fetch the PDF
+            async with session.get(link, timeout=timeout_seconds) as response:
+                if response.status == 200:
+                    pdf_name = f"{object_id}.pdf"
+                    pdf_path = os.path.join(output_folder, pdf_name)
+                    with open(pdf_path, 'wb') as pdf_file:
+                        pdf_file.write(await response.read())
+                else:
+                    error = (link, object_id)
+        else:
+            error = (link, object_id)
+
+    except Exception:
+        # Catch any exception and append to error
+        error = (link, object_id)
+
+    return error
 
 
-def filtering_useful_data(date_column: str,
-                          start_date: str,
-                          end_date: str,
-                          data: pd.DataFrame):
-    """
-    Takes as input Geodataframe, parses the dates, filters BP from 2012 and onwards and keeps only PDF files. 
-    """
-
-    # Parse date column into date format
-    data[date_column] = data[date_column].apply(parse_date)
-
-    # Define the start date for filtering
-    start_date = pd.to_datetime(start_date)
-    end_date = pd.to_datetime(end_date)
-
-    # Filter rows which the date is 2012 and onwards
-    filtered_data = data[(data[date_column] >= start_date) & (data[date_column] < end_date)]
-
-    return filtered_data
-
-
-def download_pdfs(link: str,
-                  object_id: str,
-                  output_folder: str,
-                  timeout_seconds: int = 120):
-    """ This function takes as input a link and downloads the PDFs to the output folder.
-
-    It also returns the links and ids that failed to download.
-
-    Args:
-        link (str): Link to the PDF
-        object_id (str): ID of the BP
-        output_folder (str): Path to the folder where the PDFs will be saved
-
-    Returns:
-        error_links (list): List of links that failed to download
-        error_ids (list): List of ids that failed to download
-    """
+async def process_group(session, group, id_column, link_column, output_folder):
+    """Process one group of data and attempt to download PDFs."""
     error_links = []
     error_ids = []
-    try:
-        # Check if the link contains downloadable content
-        if is_downloadable(link):
-            # Connect to link
-            response = requests.get(link, timeout=timeout_seconds)
+    
+    for _, row in group.iterrows():
+        link = row[link_column]
+        object_id = str(row[id_column])
 
-            if response.status_code == 200:
-                # Define the pdf path
-                pdf_name = object_id + (".pdf")
-                pdf_path = os.path.join(output_folder, pdf_name)
-
-                # Save the PDF content to a file
-                with open(pdf_path, 'wb') as pdf_file:
-                    pdf_file.write(response.content)
-                # print(f"Downloaded: {pdf_name}")
+        # Try downloading
+        error = await download_pdf(session, link, object_id, output_folder)
+        
+        if not error:
+            # Successful download; move to the next group
+            break
         else:
-            # print(f"Failed to download: {link}")
-
-            # If we get an error, append id and link to lists
-            error_links.append(link)
-            error_ids.append(object_id)
-
-    except:
-        # If we get an error, append id and link to lists
-        error_links.append(link)
-        error_ids.append(object_id)
+            # If there’s an error, keep the record
+            error_links.append(error[0])
+            error_ids.append(error[1])
 
     return error_links, error_ids
 
 
-def run_pdf_downloader(input_df: pd.DataFrame,
-                       id_column: str,
-                       link_column: str,
-                       output_folder : str,
-                       sample: bool = False
-                       ):
-    """
-    This function takes as input a dataframe with the links to the PDFs and downloads them to the output folder.
-
-
-    Args:
-        input_df (pd.DataFrame): DataFrame that contains the links to the PDFs.
-        id_column (str): Name of ID column
-        link_column (str): Column that contains the links
-        output_folder (str): Path to the folder where the PDFs will be saved
-        sample (bool): Number of rows to sample from the input_df. If None, all rows are used.
-
-    """
-
-    # Make empty lists that append links that didn't scrape
+async def run_pdf_downloader_async(
+    input_df: pd.DataFrame,
+    id_column: str,
+    link_column: str,
+    output_folder: str,
+    sample: bool = False
+):
+    """Asynchronous function to download PDFs from a DataFrame."""
+    
+    # Prepare error lists
     error_links = []
     error_ids = []
 
+    # Sample data if specified
     if sample:
-        input_df = input_df.groupby(['bplan_date_category', 'flooding_risk', 'ROR']).apply(lambda x: x.sample(min(len(x), 10)))
-        input_df = input_df.reset_index(drop=True)
+        input_df = input_df.groupby(['bplan_date_category', 'flooding_risk', 'ROR']).apply(
+            lambda x: x.sample(min(len(x), 10))
+        ).reset_index(drop=True)
 
-    # Check if the output folder exists, if not creates it
+    # Ensure output folder exists
     if not os.path.exists(output_folder):
         os.mkdir(output_folder)
 
-    # Iterate over rows of the dataframe
-    # Loop through the DataFrame rows
-    for (old_bplan, flooding_risk, ROR), group in tqdm(input_df.groupby(['bplan_date_category', 'flooding_risk', 'ROR']), 
-                                                       total = len(input_df.groupby(['bplan_date_category', 'flooding_risk', 'ROR']))):
-        for index, row in group.iterrows():
-            link = row[link_column]
-            object_id = str(row[id_column])
+    # Create a single session for all requests
+    async with aiohttp.ClientSession() as session:
+        tasks = []
+        grouped = input_df.groupby(['bplan_date_category', 'flooding_risk', 'ROR'])
+        for (old_bplan, flooding_risk, ROR), group in grouped:
+            tasks.append(process_group(session, group, id_column, link_column, output_folder))
+        
+        # Use asyncio.gather to parallelize the group processing
+        results = await tqdm.gather(*tasks, total=len(grouped))
 
-            # Try downloading
-            error_links_single, error_ids_single = download_pdfs(link=link, object_id=object_id, output_folder=output_folder)
+        # Aggregate all errors
+        for group_errors in results:
+            if group_errors:
+                group_error_links, group_error_ids = group_errors
+                error_links.extend(group_error_links)
+                error_ids.extend(group_error_ids)
 
-            # If success (no errors), move to the next group
-            if not error_links_single:
-                #print(f"✅ Successfully downloaded: {link} ({old_bplan}, {flooding_risk}, {ROR})")
-                break  # Move to the next group
+    # Save error links to a CSV file
+    errors_df = pd.DataFrame({'objectid': error_ids, 'scanurl': error_links})
+    errors_df.to_csv(os.path.join(output_folder, "error_links.csv"), index=False)
 
-            # If failure, try next link in the same group
-            #print(f"❌ Failed: {link}, trying next in group...")
-            error_links.extend(error_links_single)
-            error_ids.extend(error_ids_single)
 
-    errors_df = pd.DataFrame.from_dict({'objectid': error_ids,
-                                        'scanurl': error_links})
-
-    errors_df.to_csv(output_folder + "/error_links.csv", index=False)
+def run_pdf_downloader(
+    input_df: pd.DataFrame,
+    id_column: str,
+    link_column: str,
+    output_folder: str,
+    sample: bool = False
+):
+    """
+    Wrapper function to run the asyncio-based downloader in a blocking context.
+    """
+    asyncio.run(
+        run_pdf_downloader_async(input_df, id_column, link_column, output_folder, sample)
+    )

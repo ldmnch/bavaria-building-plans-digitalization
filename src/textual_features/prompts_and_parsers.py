@@ -12,15 +12,13 @@ from helpers.helpers import read_json_to_str
 class GRZ(BaseModel):
     value: Optional[float] = Field(
         None,
-        description="Der numerische Wert der Grundflächenzahl oder 'null', falls nicht vorhanden.",
-        example=0.75
+        description="Der numerische Wert der Grundflächenzahl oder 'null', falls nicht vorhanden."
     )
 
 class GFZ(BaseModel):
     value: Optional[float] = Field(
         None,
-        description="Der numerische Wert der Geschoßflächenzahl oder 'null', falls nicht vorhanden.",
-        example=1.0
+        description="Der numerische Wert der Geschoßflächenzahl oder 'null', falls nicht vorhanden."
     )
 
 class BuildingSealing(BaseModel):
@@ -31,44 +29,38 @@ class BuildingSealing(BaseModel):
 
 class GOK(BaseModel):
 
-    value: Optional[conint(ge=0)] = Field(
+    value: Optional[float] = Field(
         None,
-        description="Der numerische Wert von GOK, oder 'null' falls nicht vorhanden.",
-        example=5 
+        description="Der numerische Wert von GOK, oder 'null' falls nicht vorhanden."
     )
 
     unit: Optional[str] = Field(
         None,
-        description="Die Maßeinheit für den numerischen Wert, oder 'null' falls nicht vorhanden.",
-        example="m"
+        description="Die Maßeinheit für den numerischen Wert, oder 'null' falls nicht vorhanden."
     )
 
 class EG_FOK(BaseModel):
 
-    value: Optional[conint(ge=0)] = Field(
+    value: Optional[float] = Field(
         None,
-        description="Der numerische Wert von EG FOK, oder 'null' falls nicht vorhanden.",
-        example=30 #
+        description="Der numerische Wert von EG FOK, oder 'null' falls nicht vorhanden."
     )
 
     unit: Optional[str] = Field(
         None,
-        description="Die Maßeinheit für den numerischen Wert, oder 'null' falls nicht vorhanden.",
-        example="cm"
+        description="Die Maßeinheit für den numerischen Wert, oder 'null' falls nicht vorhanden."
     )
 
 class FOK(BaseModel):
 
-    value: Optional[conint(ge=0)] = Field(
+    value: Optional[float] = Field(
         None,
-        description="Der numerische Wert von FOK, oder 'null' falls nicht vorhanden.",
-        example=5
+        description="Der numerische Wert von FOK, oder 'null' falls nicht vorhanden."
     )
 
     unit: Optional[str] = Field(
         None,
-        description="Die Maßeinheit für den numerischen Wert, oder 'null' falls nicht vorhanden.",
-        example="cm"
+        description="Die Maßeinheit für den numerischen Wert, oder 'null' falls nicht vorhanden."
     )
 
 class BuildingFloors(BaseModel):
@@ -83,22 +75,19 @@ class BuildingFloors(BaseModel):
 class HW100(BaseModel):
     value: Optional[float] = Field(
         None,
-        description="HW100 beschreibt den Hochwasserabfluss, der statistisch einmal in 100 Jahren zu erwarten ist.",
-        example=315.40
-    )
+        description="HW100 beschreibt den Hochwasserabfluss, der statistisch einmal in 100 Jahren zu erwarten ist."
+        )
 
 class HW10(BaseModel):
     value: Optional[float] = Field(
         None,
-        description="HW10 beschreibt den Hochwasserabfluss, der statistisch einmal in 10 Jahren zu erwarten ist.",
-        example=560.30
-    )
+        description="HW10 beschreibt den Hochwasserabfluss, der statistisch einmal in 10 Jahren zu erwarten ist."
+        )
 
 class Grundwasser(BaseModel):
     value: Optional[str] = Field(
         None,
-        description="Der Wert des Grundwasserspiegels.",
-        example="0.0"
+        description="Der Wert des Grundwasserspiegels."
     )
 
     #unit: Optional[str] = Field(

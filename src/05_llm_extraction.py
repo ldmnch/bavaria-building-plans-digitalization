@@ -16,13 +16,13 @@ CWD = os.getcwd()
 data_dir = os.path.join(CWD, 'data')
 
 #Specify mode (working with a sample or all the files?)
-sample_mode = True 
+sample_mode = False
 sample_size = 15
 
 # specify file path
 INPUT_FILE_PATH = os.path.join(data_dir, "proc", "building_plans_sample", "bp_text.json")
 
-PROMPT_TYPE = 'sealing' # Can be sealing, floors or flooding depending on the prompt you want to use
+PROMPT_TYPE = 'flooding' # Can be sealing, floors or flooding depending on the prompt you want to use
 
 if PROMPT_TYPE == 'sealing':
     OUTPUT_FILE_PATH = os.path.join("data", "proc", "building_plans_sample", "features",  "info_data_extraction.csv")
@@ -46,11 +46,11 @@ token_provider = credential.get_login_token_to_azure_cognitive_services()
 
 if sample_mode:
 
+    random.seed(42)  # Set the random seed for reproducibility
     unique_ids = input_df['id'].unique()
     sample_ids = random.sample(list(unique_ids), sample_size)
 
     run_data = input_df[input_df['id'].isin(sample_ids)]
-
 else: 
  
     run_data = input_df

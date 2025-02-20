@@ -57,7 +57,7 @@ def pdf_parser_from_folder(folder_path: str,
         else:
             raise ValueError(f"Sample of {sample_size} larger than folder contents of {len(pdf_files)}")
 
-    # define empty df to store parsed result
+    # define empty df to store parsed result
     parsed_data = []
 
     # iterate over all files in folder

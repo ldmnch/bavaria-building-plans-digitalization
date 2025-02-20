@@ -31,7 +31,7 @@ pdfs_downloader.run_pdf_downloader(input_df = data,
     id_column = 'id',
     link_column = 'URL zur Legende',
     output_folder = "./data/raw/building_plan_sample/pdfs",
-    sample = True)
+    sample = False)
 
 # %% [markdown]
 # Then, we run the function run_pdfs_split that converts pdfs into jpg for the OCR.

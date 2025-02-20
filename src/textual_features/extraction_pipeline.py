@@ -3,7 +3,6 @@ import base64
 import pandas as pd
 from aiofiles import open as aio_open
 
-
 from helpers.helpers import create_llm_costs_dict
 from azure_authentication.customized_azure_login import CredentialFactory
 
@@ -14,8 +13,6 @@ class Pipeline:
     """
     _summary_
     """
-    #def __init__(self):
-    #    pass
         
     async def run_and_save_llm_extraction(self, data, getter, llm, output_path, batch_size=10):
         results = await self.run_llm_extraction(data, getter, llm, batch_size)
@@ -41,7 +38,7 @@ class Pipeline:
         batch_results = []
         for _, row in batch_data.iterrows():
             try:
-                extraction_results = await getter._bound_get_emissions_from_raw_text(row['content'])
+                extraction_results = await getter._bound_get_emissions_from_raw_text(row['content']) # Change names of functions
             except Exception as e:
                 # Log errors or handle them as needed
                 print(f"Error processing row: {e}")
@@ -49,7 +46,14 @@ class Pipeline:
             llm_costs = create_llm_costs_dict(extraction_results, llm)
             llm.token_counter.reset_counts()
 
-            parsed_extractions = getter._parse_to_dict_llm_output(extraction_results)
+            try: 
+                parsed_extractions = getter._parse_to_dict_llm_output(extraction_results)
+
+            except Exception as e:
+                # Log errors or handle them as needed
+                print(f"Error parsing extraction results: {e}")
+                continue
+
             row_data = {
                 "id": row.get("id", None),
                 "filename": row.get("filename", None),

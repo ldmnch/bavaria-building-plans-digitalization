@@ -46,19 +46,16 @@ class Llm:
         
         self.model_name = model_name
         
-        credential = CredentialFactory().select_credential()
-        token_provider = credential.get_login_token_to_azure_cognitive_services()
-
         if self.model_name == "gpt-35-turbo-16k":
 
             self.llamaindex_llm = AzureOpenAI(
                 engine="gpt-35-turbo-0301",
                 model="gpt-35-turbo-16k",
                 temperature=0.0,
-                azure_endpoint=os.environ["AZURE_ENDPOINT_GIST_PROJECT_WESTEUROPE"],
+                azure_endpoint=os.environ["AZURE_ENDPOINT_GREENDIA_NORWAYEAST"],
                 # use_azure_ad=True, # only useful for debugging purposes?
-                api_version="2024-02-01",
-                api_key=token_provider()
+                api_version="2024-05-01-preview",
+                api_key=os.environ["OPENAI_GREENDIA_KEY"]
             )
 
             self.token_counter = TokenCountingHandler(
@@ -73,18 +70,16 @@ class Llm:
         elif self.model_name == "gpt-4-1106-preview":
 
             self.llamaindex_llm = AzureOpenAI(
-                engine="gpt-4-1106-preview", model="gpt-4-1106-preview", temperature=0.0,
-                azure_endpoint=os.getenv("AZURE_ENDPOINT_GIST_PROJECT_NORWAYEAST"),
+                engine="gpt-4", model="gpt-4", temperature=0.0,
+                azure_endpoint=os.environ["AZURE_ENDPOINT_GREENDIA_NORWAYEAST"],
                 # use_azure_ad=True, # only useful for debugging purposes?
-                api_version="2024-02-01",
-                api_key=token_provider(),
+                api_version="2024-05-01-preview",
+                api_key=os.environ["OPENAI_GREENDIA_KEY"],
                 max_retries=4,
                 timeout=240.0,
                 reuse_client=False)
 
             self.token_counter = TokenCountingHandler(
-                # both gpt-3.5-turbo and gpt-4 are based on the same cl100k_base encoding -> doesn't matter which model we use here
-                # tokenizer=tiktoken.encoding_for_model("gpt-3.5-turbo").encode
                 tokenizer=tiktoken.encoding_for_model("gpt-4").encode
             )
 
