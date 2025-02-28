@@ -47,6 +47,7 @@ class Pipeline:
             llm.token_counter.reset_counts()
 
             try: 
+
                 parsed_extractions = getter._parse_to_dict_llm_output(extraction_results)
 
             except Exception as e:
@@ -64,6 +65,7 @@ class Pipeline:
             }
             row_data.update(parsed_extractions)
             batch_results.append(row_data)
+            
         return batch_results
 
     async def save_llm_extraction_results(self, results, output_path):

@@ -1,7 +1,3 @@
-# %%
-#import pandas as pd
-#import numpy as np
-#import json
 import geopandas as gpd
 from pdfs_to_text import pdfs_downloader, pdfs_preprocessing
 
@@ -17,6 +13,7 @@ filename = './data/proc/building_plans/building_plans_metadata.geojson'
 
 # %%
 data = gpd.read_file(filename)
+data = data.sample(100)
 
 # %% [markdown]
 # - Adjust `id_column` with the name of the ID column.
@@ -30,14 +27,14 @@ data = gpd.read_file(filename)
 pdfs_downloader.run_pdf_downloader(input_df = data,
     id_column = 'id',
     link_column = 'URL zur Legende',
-    output_folder = "./data/raw/building_plan_sample/pdfs",
+    output_folder = "./data/raw/building_plan_sample/pdfs_subset/",
     sample = False)
 
 # %% [markdown]
 # Then, we run the function run_pdfs_split that converts pdfs into jpg for the OCR.
 
 # %%
-pdfs_preprocessing.run_pdfs_split(input_folder='./data/raw/building_plan_sample/pdfs',
-                                  output_folder= './data/proc/building_plans_sample/split_pdf/')
+#pdfs_preprocessing.run_pdfs_split(input_folder='./data/raw/building_plan_sample/pdfs',
+#                                  output_folder= './data/proc/building_plans_sample/split_pdf/')
 
 

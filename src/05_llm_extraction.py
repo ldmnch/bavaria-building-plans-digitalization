@@ -41,9 +41,6 @@ bp_text['id'] = bp_text['filename'].str.extract(r'(\d+)_').astype(int)
 
 input_df = bp_text
 
-credential = CredentialFactory().select_credential()
-token_provider = credential.get_login_token_to_azure_cognitive_services()
-
 if sample_mode:
 
     random.seed(42)  # Set the random seed for reproducibility

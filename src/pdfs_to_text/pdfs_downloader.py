@@ -78,32 +78,51 @@ async def run_pdf_downloader_async(
     error_links = []
     error_ids = []
 
-    # Sample data if specified
-    if sample:
-        input_df = input_df.groupby(['bplan_date_category', 'flooding_risk', 'ROR']).apply(
-            lambda x: x.sample(min(len(x), 10))
-        ).reset_index(drop=True)
-
     # Ensure output folder exists
     if not os.path.exists(output_folder):
         os.mkdir(output_folder)
 
-    # Create a single session for all requests
-    async with aiohttp.ClientSession() as session:
-        tasks = []
-        grouped = input_df.groupby(['bplan_date_category', 'flooding_risk', 'ROR'])
-        for (old_bplan, flooding_risk, ROR), group in grouped:
-            tasks.append(process_group(session, group, id_column, link_column, output_folder))
-        
-        # Use asyncio.gather to parallelize the group processing
-        results = await tqdm.gather(*tasks, total=len(grouped))
+    # Sample data if specified
+    if sample:
 
-        # Aggregate all errors
-        for group_errors in results:
-            if group_errors:
-                group_error_links, group_error_ids = group_errors
-                error_links.extend(group_error_links)
-                error_ids.extend(group_error_ids)
+        input_df = input_df.groupby(['bplan_date_category', 'flooding_risk', 'ROR']).apply(
+            lambda x: x.sample(min(len(x), 10))
+        ).reset_index(drop=True)
+
+        # Create a single session for all requests
+        async with aiohttp.ClientSession() as session:
+            tasks = []
+            grouped = input_df.groupby(['bplan_date_category', 'flooding_risk', 'ROR'])
+            for (old_bplan, flooding_risk, ROR), group in grouped:
+                tasks.append(process_group(session, group, id_column, link_column, output_folder))
+            
+            # Use asyncio.gather to parallelize the group processing
+            results = await tqdm.gather(*tasks, total=len(tasks))
+
+            # Aggregate all errors
+            for group_errors in results:
+                if group_errors:
+                    group_error_links, group_error_ids = group_errors
+                    error_links.extend(group_error_links)
+                    error_ids.extend(group_error_ids)
+
+    else: 
+        # Create a single session for all requests
+        async with aiohttp.ClientSession() as session:
+            tasks = []
+            for _, row in input_df.iterrows():
+                link = row[link_column]
+                object_id = str(row[id_column])
+                tasks.append(download_pdf(session, link, object_id, output_folder))
+            
+            # Use asyncio.gather to parallelize the group processing
+            results = await tqdm.gather(*tasks, total=len(tasks))
+
+            # Aggregate all errors
+            for error in results:
+                if error:
+                    error_links.append(error[0])
+                    error_ids.append(error[1])
 
     # Save error links to a CSV file
     errors_df = pd.DataFrame({'objectid': error_ids, 'scanurl': error_links})
