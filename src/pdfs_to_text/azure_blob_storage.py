@@ -1,6 +1,7 @@
 import os, uuid
 from azure.identity import DefaultAzureCredential
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
+from azure.core.exceptions import ResourceExistsError
 
 # Retrieve the connection string for use with the application. The storage
 # connection string is stored in an environment variable on the machine
@@ -15,28 +16,37 @@ def azure_container_setup():
     # Create the BlobServiceClient object
     blob_service_client = BlobServiceClient.from_connection_string(connect_str)
 
-    # Create a unique name for the container
-    container_name = str(uuid.uuid4())
-
-    # Create the container
-    container_client = blob_service_client.create_container(container_name)
-
     return blob_service_client
 
 def create_azure_container(blob_service_client, container_name):
 
-    container_client = blob_service_client.create_container(container_name)
+    container_name = 'pdfs-'+container_name[-7::] #TODO improve this
+    container_name = container_name.replace('_', '-')
+    try: 
+
+        container_client = blob_service_client.create_container(container_name)
+    
+    except ResourceExistsError: 
+
+        container_client = blob_service_client.get_container_client(container= container_name) 
+
 
     return container_client
 
-def azure_upload_blob(container_client, file_path):
+def azure_upload_blob(container_client, folder_path):
 
     # Create a blob client using the local file name as the name for the blob
-    blob_client = container_client.get_blob_client(os.path.basename(file_path))
+    blob_client = container_client.get_blob_client(os.path.basename(folder_path))
 
-    print("\nUploading to Azure Storage as blob:\n\t" + os.path.basename(file_path))
+    for filename in os.listdir(folder_path):
+        file_path = os.path.join(folder_path, filename)
 
-    # Upload the created file
-    with open(file_path, "rb") as data:
-        blob_client.upload_blob(data)
+        if os.path.isfile(file_path):  # Make sure it's a file
+            blob_client = container_client.get_blob_client(filename)
 
+            print(f"\nUploading {filename} to Azure Storage...")
+
+            with open(file_path, "rb") as data:
+                blob_client.upload_blob(data)
+
+    print(f"\nAll files in {folder_path} uploaded successfully.")
