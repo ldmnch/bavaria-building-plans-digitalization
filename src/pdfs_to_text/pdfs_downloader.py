@@ -128,17 +128,29 @@ async def run_pdf_downloader_async(
     errors_df = pd.DataFrame({'objectid': error_ids, 'scanurl': error_links})
     errors_df.to_csv(os.path.join(output_folder, "error_links.csv"), index=False)
 
-
-def run_pdf_downloader(
+def run_batch_pdf_downloader(
     input_df: pd.DataFrame,
     id_column: str,
     link_column: str,
     output_folder: str,
-    sample: bool = False
+    sample: bool = False,
+    batch_size: int = 10
 ):
     """
     Wrapper function to run the asyncio-based downloader in a blocking context.
     """
-    asyncio.run(
-        run_pdf_downloader_async(input_df, id_column, link_column, output_folder, sample)
-    )
+
+    if batch_size:
+
+        # Split the input DataFrame into batches
+        input_batches = np.array_split(input_df, len(input_df) // batch_size)
+
+        for batch_idx, batch in enumerate(input_batches):
+            print(f"Processing batch {batch_idx + 1} of {len(input_batches)}...")
+
+            output_folder = os.path.join(output_folder, f"batch_{batch_idx + 1}")
+            os.makedirs(output_folder, exist_ok=True)
+            
+            asyncio.run(
+                run_pdf_downloader_async(batch, id_column, link_column, output_folder, sample)
+            )
