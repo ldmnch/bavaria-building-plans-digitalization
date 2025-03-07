@@ -116,7 +116,10 @@ class PdfDownloader:
         for batch_idx, batch in enumerate(input_batches):
             print(f"Processing batch {batch_idx + 1} of {len(input_batches)}...")
 
-            batch_folder = os.path.join(self.output_folder , f"batch_{batch_idx + 1}")
+            batch_name =  f"batch-{batch_idx + 1}"
+
+            batch_folder = os.path.join(self.output_folder , batch_name)
+
             if os.path.isdir(batch_folder):
                 print("existing folder")
             else:
@@ -130,7 +133,7 @@ class PdfDownloader:
                                                 self.sample)
 
             # Use the injected Azure upload function
-            self.azure_upload_blob(self.azure_container(self.blob_service_client, batch_folder), str(batch_folder))
+            self.azure_upload_blob(self.azure_container(self.blob_service_client, batch_name), str(batch_folder))
 
             shutil.rmtree(batch_folder) 
 
@@ -141,8 +144,10 @@ class PdfDownloader:
         """
 
         if self.batch_size:
+
             input_batches = np.array_split(self.input_df, len(self.input_df) // self.batch_size)
             asyncio.run(self.process_batches_async(input_batches))  # Efficient event loop handling
+
         else:
             asyncio.run(self.run_pdf_downloader_async(self.input_df))
 

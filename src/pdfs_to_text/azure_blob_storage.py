@@ -2,6 +2,7 @@ import os, uuid
 from azure.identity import DefaultAzureCredential
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
 from azure.core.exceptions import ResourceExistsError
+from datetime import date 
 
 # Retrieve the connection string for use with the application. The storage
 # connection string is stored in an environment variable on the machine
@@ -20,8 +21,10 @@ def azure_container_setup():
 
 def create_azure_container(blob_service_client, container_name):
 
-    container_name = 'pdfs-'+container_name[-7::] #TODO improve this
-    container_name = container_name.replace('_', '-')
+    todays_date = date.today() 
+
+    container_name = str(todays_date)+"-"+container_name
+
     try: 
 
         container_client = blob_service_client.create_container(container_name)

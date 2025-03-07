@@ -15,8 +15,6 @@ container_client = azure_blob_storage.create_azure_container
 # - Adjust `link_column` with the name of the column that contains the links.
 # - Adjust `date_column` to the column with date of the building plans.
 # - Adjust `output_folder` with name of the folder you want to save the data to.
-# 
-# The function also contains the optional parameter `sample_n` which can be used to only download a sample, defining the number of observations to take.
 
 PdfDownloader = pdfs_downloader.PdfDownloader
 
