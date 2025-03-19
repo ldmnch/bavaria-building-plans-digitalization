@@ -1,0 +1,39 @@
+correct_result,count,metric,percent
+2. Correct extraction: no values present in the document,31,grz_value,50.81967213114754
+4. Failed extraction: LLM only extracted some of the values correctly,17,grz_value,27.868852459016395
+1. Correct extraction: LLM extracted all values correctly,10,grz_value,16.39344262295082
+3. Failed extraction: LLM failed to extract all of the values correctly,3,grz_value,4.918032786885246
+2. Correct extraction: no values present in the document,35,gfz_value,57.377049180327866
+4. Failed extraction: LLM only extracted some of the values correctly,17,gfz_value,27.868852459016395
+1. Correct extraction: LLM extracted all values correctly,6,gfz_value,9.836065573770492
+3. Failed extraction: LLM failed to extract all of the values correctly,3,gfz_value,4.918032786885246
+2. Correct extraction: no values present in the document,57,hw100_value,93.44262295081967
+4. Failed extraction: LLM only extracted some of the values correctly,2,hw100_value,3.278688524590164
+1. Correct extraction: LLM extracted all values correctly,1,hw100_value,1.639344262295082
+3. Failed extraction: LLM failed to extract all of the values correctly,1,hw100_value,1.639344262295082
+2. Correct extraction: no values present in the document,60,hw10_value,98.36065573770492
+4. Failed extraction: LLM only extracted some of the values correctly,1,hw10_value,1.639344262295082
+2. Correct extraction: no values present in the document,55,grundwasser_value,90.1639344262295
+4. Failed extraction: LLM only extracted some of the values correctly,3,grundwasser_value,4.918032786885246
+1. Correct extraction: LLM extracted all values correctly,2,grundwasser_value,3.278688524590164
+3. Failed extraction: LLM failed to extract all of the values correctly,1,grundwasser_value,1.639344262295082
+2. Correct extraction: no values present in the document,52,eg_fok_value,85.24590163934427
+1. Correct extraction: LLM extracted all values correctly,4,eg_fok_value,6.557377049180328
+4. Failed extraction: LLM only extracted some of the values correctly,3,eg_fok_value,4.918032786885246
+3. Failed extraction: LLM failed to extract all of the values correctly,2,eg_fok_value,3.278688524590164
+2. Correct extraction: no values present in the document,52,eg_fok_unit,85.24590163934427
+4. Failed extraction: LLM only extracted some of the values correctly,5,eg_fok_unit,8.19672131147541
+1. Correct extraction: LLM extracted all values correctly,3,eg_fok_unit,4.918032786885246
+3. Failed extraction: LLM failed to extract all of the values correctly,1,eg_fok_unit,1.639344262295082
+2. Correct extraction: no values present in the document,58,gok_value,95.08196721311475
+1. Correct extraction: LLM extracted all values correctly,2,gok_value,3.278688524590164
+4. Failed extraction: LLM only extracted some of the values correctly,1,gok_value,1.639344262295082
+2. Correct extraction: no values present in the document,58,gok_unit,95.08196721311475
+1. Correct extraction: LLM extracted all values correctly,2,gok_unit,3.278688524590164
+4. Failed extraction: LLM only extracted some of the values correctly,1,gok_unit,1.639344262295082
+2. Correct extraction: no values present in the document,59,fok_value,96.72131147540983
+3. Failed extraction: LLM failed to extract all of the values correctly,1,fok_value,1.639344262295082
+4. Failed extraction: LLM only extracted some of the values correctly,1,fok_value,1.639344262295082
+2. Correct extraction: no values present in the document,59,fok_unit,96.72131147540983
+3. Failed extraction: LLM failed to extract all of the values correctly,1,fok_unit,1.639344262295082
+4. Failed extraction: LLM only extracted some of the values correctly,1,fok_unit,1.639344262295082
