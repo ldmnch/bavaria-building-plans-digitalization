@@ -1,0 +1,9 @@
+correct_result,count,metric
+True negative,487,gfz_value
+False negative,33,gfz_value
+True positive,19,gfz_value
+False positive,3,gfz_value
+True negative,481,grz_value
+False negative,37,grz_value
+True positive,23,grz_value
+False positive,8,grz_value

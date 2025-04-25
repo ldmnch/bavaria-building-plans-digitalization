@@ -1,0 +1,9 @@
+correct_result,count,metric,percent
+2. Correct extraction: no values present in the document,38,gfz_value,62.295081967213115
+4. Failed extraction: LLM only extracted some of the values correctly,14,gfz_value,22.950819672131146
+1. Correct extraction: LLM extracted all values correctly,6,gfz_value,9.836065573770492
+3. Failed extraction: LLM failed to extract all of the values correctly,3,gfz_value,4.918032786885246
+2. Correct extraction: no values present in the document,35,grz_value,57.377049180327866
+4. Failed extraction: LLM only extracted some of the values correctly,14,grz_value,22.950819672131146
+1. Correct extraction: LLM extracted all values correctly,11,grz_value,18.0327868852459
+3. Failed extraction: LLM failed to extract all of the values correctly,1,grz_value,1.639344262295082
