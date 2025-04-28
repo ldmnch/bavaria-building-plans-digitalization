@@ -5,28 +5,42 @@ import numpy as np
 
 class EvaluationPipeline:
 
-    def __init__(self, ground_truth_path, newly_extracted_data_path):
+    def __init__(self, ground_truth_path, newly_extracted_data_path, evaluation_mode):
         self.ground_truth_path = ground_truth_path
         self.newly_extracted_data_path = newly_extracted_data_path
+        self.evaluation_mode = evaluation_mode
 
     def run(self):
         # Import and preprocess the data
         ground_truth_data = self.import_and_prepro_ground_truth(self.ground_truth_path)
 
-        newly_extracted_data = self.import_and_prepro_new_data(self.newly_extracted_data_path)
+        if self.evaluation_mode == 'ground_truth':
 
-        # Join the newly extracted data with the ground truth data
-        df = self.join_with_ground_truth(newly_extracted_data, ground_truth_data)
+            # Get results at document level
+            df = self.get_type_of_error_at_row_level(ground_truth_data, evaluation_mode=self.evaluation_mode)
+            
+            row_errors = df.groupby(['met', 'correct_result']).size().reset_index(name='count')
+            # Get f1 score and accuracy for each metric
+            metrics = row_errors['met'].unique()
+            f1_scores = self.compute_f1_score_per_metric(row_errors, metrics)
+            accuracies = self.compute_accuracy_per_metric(row_errors, metrics)
 
-        # Get results at row level
-        row_errors = self.check_correct_result(df, evaluation_level='row')
-        row_errors = row_errors.groupby(['met', 'correct_result']).size().reset_index(name='count')
+        if self.evaluation_mode == 'new_data':
 
-        # Get f1 score and accuracy for each metric
-        metrics = row_errors['met'].unique()
-        f1_scores = self.compute_f1_score_per_metric(row_errors, metrics)
-        accuracies = {metric: self.compute_accuracy(row_errors, metric) for metric in metrics}
+            newly_extracted_data = self.import_and_prepro_new_data(self.newly_extracted_data_path)
 
+            # Join the newly extracted data with the ground truth data
+            df = self.join_with_ground_truth(newly_extracted_data, ground_truth_data)
+
+            # Get results at row level
+            row_errors = self.get_type_of_error_at_row_level(df, evaluation_mode=self.evaluation_mode)
+            row_errors = row_errors.groupby(['met', 'correct_result']).size().reset_index(name='count')
+
+            # Get f1 score and accuracy for each metric
+            metrics = row_errors['met'].unique()
+            f1_scores = self.compute_f1_score_per_metric(row_errors, metrics)
+            accuracies = self.compute_accuracy_per_metric(row_errors, metrics)
+            
         return f1_scores, accuracies, row_errors
     
     def import_and_prepro_ground_truth(self, path : str):
@@ -90,93 +104,68 @@ class EvaluationPipeline:
 
         return df
 
-    def get_type_of_error_at_row_level(self, df):
+    def get_type_of_error_at_row_level(self, df, evaluation_mode='new_data'):
         """
         Determine the type of error based on the comparison of values.
         """
-        df['correct_result'] = np.select(
-            [
-                # True positive: new_value matches the appropriate reference value
-                # Case 1: Original value is correct (Ja) and new_value matches it
-                ((df['Wert korrekt? (Ja/ Nein)'] == 'Ja') & df['match_with_original_value']),
-                # Case 2: Original value is incorrect (Nein) and new_value matches the corrected value
-                ((df['Wert korrekt? (Ja/ Nein)'] == 'Nein') & df['match_with_corrected_value']),
-                
-                # False negative: new_value is missing but should exist
-                (df['new_value'].isna() & 
-                ((df['Wert korrekt? (Ja/ Nein)'] == 'Ja') | 
-                ((df['Wert korrekt? (Ja/ Nein)'] == 'Nein').values & df['Korrigierte Wert (falls nötig)'].notna().values))),
-                
-                # False positive: new_value exists but doesn't match the appropriate reference value
-                # Case 1: Original value is correct (Ja) but new_value doesn't match
-                ((df['Wert korrekt? (Ja/ Nein)'] == 'Ja') & df['new_value'].notna() & (~df['match_with_original_value'])),
-                # Case 2: Original value is incorrect (Nein) and new_value doesn't match correction
-                ((df['Wert korrekt? (Ja/ Nein)'] == 'Nein') & df['new_value'].notna() & (~df['match_with_corrected_value'])),
-                
-                # True negative: nothing to extract and nothing was extracted
-                (df['new_value'].isna() & 
-                ((df['Wert korrekt? (Ja/ Nein)'].isna()) | 
-                ((df['Wert korrekt? (Ja/ Nein)'] == 'Nein').values & df['Korrigierte Wert (falls nötig)'].isna().values)))
-            ],
-            [
-                'True positive',
-                'True positive',
-                'False negative', 
-                'False positive',
-                'False positive',
-                'True negative'
-            ],
-            default=None
-        )    
 
-        return df['correct_result']
+        if evaluation_mode == 'ground_truth':
 
-    def determine_result_per_group(group):
-            has_ja = group['Wert korrekt? (Ja/ Nein)'].eq('Ja').any()
-            has_nein = group['Wert korrekt? (Ja/ Nein)'].eq('Nein').any()
-            all_na = group['Wert korrekt? (Ja/ Nein)'].isna().all()
+            df['correct_result'] = np.select(
+                [
+                    df['Wert korrekt? (Ja/ Nein)'] == 'Ja',
+                    (df['Wert korrekt? (Ja/ Nein)'] == 'Nein') & (df['value'].isna()),
+                    (df['Wert korrekt? (Ja/ Nein)'] == 'Nein') & (df['value'].notna()),
+                    (df['Wert korrekt? (Ja/ Nein)'].isna()) & (df['value'].isna())
+                ],
+                [
+                    'True positive', 
+                    'False negative', 
+                    'False positive', 
+                    'True negative'
+                ],
+                default=None
+            )
 
-            if has_ja and has_nein:
-                return '3. Failed extraction: LLM failed to extract all of the values correctly'
-            elif has_ja:
-                return '1. Correct extraction: LLM extracted all values correctly'
-            elif has_nein:
-                return '4. Failed extraction: LLM only extracted some of the values correctly'
-            elif all_na:
-                return '2. Correct extraction: no values present in the document'
-            
+        elif evaluation_mode == 'new_data':
 
-
-    def check_correct_result(self,
-                             df, 
-                            evaluation_level = 'document' # can be document or row
-                            ):
-        """
-        Groups by 'id' and checks for the following conditions:
-        - If at least one 'Ja' and at least one 'Nein' exists -> 'failed to extract all correct metrics'
-        - If at least one 'Ja' exists -> 'extracted all correct metrics'
-        - If all values are NaN -> 'no extracted metric'
-        - Otherwise -> 'incorrect metric'
-
-        Args:
-        df (pd.DataFrame): The input DataFrame.
-
-        Returns:
-        pd.DataFrame: A DataFrame with 'id' and 'correct_result'.
-        """
-            
-        if evaluation_level == 'document':
-
-            # Group by 'id' and apply the function
-            # NOTE: FOR NOW, THIS IS DEPRECATED. NOT RELEVANT!!! 
-            df = df.groupby('id_general').apply(determine_result_per_group).reset_index(name='correct_result')
-
-        elif evaluation_level == 'row':
-
-            df['correct_result'] = self.get_type_of_error_at_row_level(df)
+            df['correct_result'] = np.select(
+                [
+                    # True positive: new_value matches the appropriate reference value
+                    # Case 1: Original value is correct (Ja) and new_value matches it
+                    ((df['Wert korrekt? (Ja/ Nein)'] == 'Ja') & df['match_with_original_value']),
+                    # Case 2: Original value is incorrect (Nein) and new_value matches the corrected value
+                    ((df['Wert korrekt? (Ja/ Nein)'] == 'Nein') & df['match_with_corrected_value']),
+                    
+                    # False negative: new_value is missing but should exist
+                    (df['new_value'].isna() & 
+                    ((df['Wert korrekt? (Ja/ Nein)'] == 'Ja') | 
+                    ((df['Wert korrekt? (Ja/ Nein)'] == 'Nein').values & df['Korrigierte Wert (falls nötig)'].notna().values))),
+                    
+                    # False positive: new_value exists but doesn't match the appropriate reference value
+                    # Case 1: Original value is correct (Ja) but new_value doesn't match
+                    ((df['Wert korrekt? (Ja/ Nein)'] == 'Ja') & df['new_value'].notna() & (~df['match_with_original_value'])),
+                    # Case 2: Original value is incorrect (Nein) and new_value doesn't match correction
+                    ((df['Wert korrekt? (Ja/ Nein)'] == 'Nein') & df['new_value'].notna() & (~df['match_with_corrected_value'])),
+                    
+                    # True negative: nothing to extract and nothing was extracted
+                    (df['new_value'].isna() & 
+                    ((df['Wert korrekt? (Ja/ Nein)'].isna()) | 
+                    ((df['Wert korrekt? (Ja/ Nein)'] == 'Nein').values & df['Korrigierte Wert (falls nötig)'].isna().values)))
+                ],
+                [
+                    'True positive',
+                    'True positive',
+                    'False negative', 
+                    'False positive',
+                    'False positive',
+                    'True negative'
+                ],
+                default=None
+            )    
 
         return df
-    
+                
     def compute_f1_score(self, df, metric):
         """
         Computes the F1 score for a given metric based on the evaluation results.
@@ -248,3 +237,23 @@ class EvaluationPipeline:
         accuracy = (tp + tn) / total if total > 0 else 0
 
         return accuracy
+    
+    def compute_accuracy_per_metric(self, df, metrics):
+
+        """
+        Computes the accuracy for each metric in the DataFrame.
+
+        Args:
+        df (pd.DataFrame): The input DataFrame.
+        metrics (list): List of metrics to compute accuracies for.
+
+        Returns:
+        pd.DataFrame: A DataFrame with metrics and their corresponding accuracies.
+        """
+        accuracies = []
+
+        for metric in metrics:
+            accuracy = self.compute_accuracy(df, metric)
+            accuracies.append({'metric': metric, 'accuracy': accuracy})
+
+        return pd.DataFrame(accuracies)
