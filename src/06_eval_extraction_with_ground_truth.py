@@ -10,7 +10,7 @@ if __name__ == "__main__":
     # Define paths to the ground truth and newly extracted data
     newly_extracted_data_path = os.path.join("data", "proc", "building_plans_sample", "features",  "info_data_extraction_new.csv")
     ground_truth_path = os.path.join("data", "final", "tables", "annotations",  "filled")
-    evaluation_mode = "ground_truth" # or "ground_truth"
+    evaluation_mode = "ground_truth" # "new_data" or "ground_truth"
 
     # Create an instance of the EvaluationPipeline class
     evaluation_pipeline = EvaluationPipeline(ground_truth_path, newly_extracted_data_path, evaluation_mode = evaluation_mode)
